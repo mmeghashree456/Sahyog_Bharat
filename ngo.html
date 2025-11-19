@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO Assistance | Sahyog</title>
+    <link rel="shortcut icon" href="image/LOGO.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/ngo.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en', includedLanguages: 'hi,bn,ta,te,gu,kn,ml,mr,pa,ur'},
+                'google_translate_element'
+            );
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+    }
+    
+    .chat-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 380px;
+        height: 550px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        z-index: 1000;
+    }
+    
+    .chat-header {
+        background-color: #1e4c88;
+        color: white;
+        padding: 15px;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .chat-header button {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    
+    .chat-body {
+        flex: 1;
+        padding: 15px;
+        overflow-y: auto;
+    }
+    
+    .message {
+        margin-bottom: 15px;
+        padding: 12px;
+        border-radius: 5px;
+        max-width: 85%;
+        word-wrap: break-word;
+        line-height: 1.4;
+    }
+    
+    .user-message {
+        background-color: #e3f2fd;
+        margin-left: auto;
+        border-bottom-right-radius: 0;
+    }
+    
+    .ai-message {
+        background-color: #f0f0f0;
+        margin-right: auto;
+        border-bottom-left-radius: 0;
+    }
+    
+    .chat-input {
+        display: flex;
+        padding: 12px;
+        border-top: 1px solid #eee;
+    }
+    
+    .chat-input input {
+        flex: 1;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-right: 10px;
+        font-size: 14px;
+    }
+    
+    .chat-input button {
+        background-color: #1e4c88;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    
+    .chat-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #1e4c88;
+        color: white;
+        border: none;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        font-size: 24px;
+    }
+    
+    .hidden {
+        display: none;
+    }
+    
+    .typing-indicator {
+        padding: 10px;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        display: none;
+        width: fit-content;
+    }
+    
+    .typing-indicator span {
+        height: 8px;
+        width: 8px;
+        background-color: #777;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 3px;
+        animation: pulse 1.5s infinite ease-in-out;
+    }
+    
+    .typing-indicator span:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+    
+    .typing-indicator span:nth-child(3) {
+        animation-delay: 0.4s;
+        margin-right: 0;
+    }
+    
+    .suggestion-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .suggestion-chip {
+        background-color: #e3f2fd;
+        border: 1px solid #1e4c88;
+        color: #1e4c88;
+        border-radius: 18px;
+        padding: 8px 12px;
+        font-size: 13px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    
+    .suggestion-chip:hover {
+        background-color: #bbdefb;
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); opacity: 0.5; }
+        50% { transform: scale(1.2); opacity: 1; }
+        100% { transform: scale(1); opacity: 0.5; }
+    }
+    
+    /* Add back button styles */
+    .back-button {
+        color: #1e4c88;
+        font-size: 24px;
+        margin-right: 15px;
+        text-decoration: none;
+        transition: transform 0.3s ease;
+    }
+    
+    .back-button:hover {
+        transform: translateX(-5px);
+        color: #0d2b4e;
+    }
+    
+    .logo {
+        display: flex;
+        align-items: center;
+    }
+</style>
+</head>
+<body>
+<button class="chat-button" id="chatButton">💬</button>
+
+<div class="chat-container hidden" id="chatContainer">
+    <div class="chat-header">
+        <span><img src="image/robot.png" alt="Sahyak" style="width: 30px; height: 30px; vertical-align: middle;"> Sahyak</span>
+        <button id="closeChat">×</button>
+    </div>
+    <div class="chat-body" id="chatBody">
+        <div class="message ai-message">Welcome! I'm here to help you learn about government schemes and your rights as a citizen. What information are you looking for today?</div>
+        
+        <div class="suggestion-chips" id="initialSuggestions">
+            <div class="suggestion-chip">Education Schemes</div>
+            <div class="suggestion-chip">Healthcare Rights</div>
+            <div class="suggestion-chip">Employment Programs</div>
+            <div class="suggestion-chip">Housing Assistance</div>
+            <div class="suggestion-chip">Senior Citizen Benefits</div>
+        </div>
+        
+        <div class="typing-indicator" id="typingIndicator">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Ask about government schemes or rights...">
+        <button id="sendMessage">Send</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const chatButton = document.getElementById('chatButton');
+        const chatContainer = document.getElementById('chatContainer');
+        const closeChat = document.getElementById('closeChat');
+        const userInput = document.getElementById('userInput');
+        const sendMessage = document.getElementById('sendMessage');
+        const chatBody = document.getElementById('chatBody');
+        const typingIndicator = document.getElementById('typingIndicator');
+        const initialSuggestions = document.getElementById('initialSuggestions');
+        
+        // Government schemes and rights information database
+        const knowledgeBase = {
+            // Government schemes
+            "pm kisan":
+        "PM-KISAN is a Central Government scheme providing income support of ₹6000 per year to all eligible farmer families across India. The amount is paid in three equal installments directly into the bank accounts of farmers.",
+      pmay: "Pradhan Mantri Awas Yojana (PMAY) aims to provide affordable housing to urban and rural poor by 2022. Beneficiaries get financial assistance to build or improve housing units.",
+      "ayushman bharat":
+        "Ayushman Bharat is a health protection scheme providing coverage of up to ₹5 lakhs per family per year for secondary and tertiary hospitalization. It targets over 10 crore poor and vulnerable families.",
+      "beti bachao beti padhao":
+        "Beti Bachao Beti Padhao is a government initiative aimed at promoting the welfare of the girl child, ensuring her education and survival. It focuses on changing societal mindset and improving access to education and healthcare.",
+      nsp: "The National Scholarship Portal (NSP) is a one-stop solution for students to apply for scholarships offered by various government departments. It helps streamline scholarship distribution and transparency.",
+      "stand up india":
+        "Stand-Up India facilitates bank loans between ₹10 lakhs to ₹1 crore to women and SC/ST entrepreneurs for setting up greenfield enterprises in manufacturing, services, or trading sectors.",
+      "digital india":
+        "Digital India is a flagship programme to transform India into a digitally empowered society and knowledge economy. It aims to provide digital infrastructure, governance, and services to citizens.",
+      "pm jan dhan":
+        "Pradhan Mantri Jan Dhan Yojana aims at financial inclusion by providing access to banking services such as savings accounts, remittances, credit, insurance, and pensions to all, especially the poor.",
+      "atal pension yojana":
+        "Atal Pension Yojana is a pension scheme targeted at unorganized sector workers, providing a fixed monthly pension after the age of 60, depending on contributions made during the working years.",
+
+            // Education Schemes
+            'education': 'There are several education schemes available, including scholarships, loan programs, and free education initiatives. What specific education level or program are you interested in?',
+            'scholarship': 'Government scholarships are available for students at various levels. These include pre-matric scholarships, post-matric scholarships, and merit-based scholarships. Many are targeted at economically disadvantaged groups, minorities, and girls.',
+            'right to education': 'The Right to Education Act guarantees free and compulsory education for all children between 6-14 years of age. It mandates that private schools reserve 25% of seats for disadvantaged sections of society.',
+            
+            // Healthcare
+            'healthcare': 'The government offers various healthcare schemes including universal health coverage programs, insurance schemes, and specialized programs for vulnerable populations. What specific healthcare information are you looking for?',
+            'health insurance': 'Several government health insurance schemes exist, including Ayushman Bharat which provides coverage up to ₹5 lakhs per family per year for secondary and tertiary care hospitalization.',
+            'medical rights': 'Healthcare rights include the right to emergency medical care, informed consent, confidentiality, access to medical records, and non-discrimination in healthcare settings.',
+            
+            // Employment
+            'employment': 'Government employment schemes include job guarantees, skill development programs, and entrepreneurship support. Are you looking for job opportunities, training, or business support?',
+            'job': 'The MGNREGA scheme guarantees 100 days of wage employment in a financial year to rural households. There are also various skill development initiatives like Pradhan Mantri Kaushal Vikas Yojana (PMKVY).',
+            'skill development': 'The Pradhan Mantri Kaushal Vikas Yojana (PMKVY) offers skill training to youth, with certification and financial rewards for successful completion.',
+            
+            // Housing
+            'housing': 'Housing schemes include affordable housing initiatives, housing loans with subsidized interest rates, and housing for economically weaker sections. What type of housing assistance are you looking for?',
+            'affordable housing': 'The Pradhan Mantri Awas Yojana aims to provide housing for all by 2022, with subsidies for economically weaker sections and low-income groups.',
+            'home loan': 'The Credit Linked Subsidy Scheme offers interest subsidies on home loans for economically weaker sections and low/middle-income groups.',
+            
+            // Senior Citizens
+            'senior citizen': 'Senior citizens are eligible for various benefits including pension schemes, healthcare benefits, tax benefits, and travel concessions. What specific senior citizen benefit are you interested in?',
+            'pension': 'The National Pension System (NPS) and Atal Pension Yojana provide pension benefits. Senior citizens also have special fixed deposit schemes with higher interest rates.',
+            'elderly care': 'The National Programme for Health Care of the Elderly (NPHCE) provides dedicated healthcare services for senior citizens.',
+            
+            // Women's Rights
+            'women': 'There are various schemes for women including education scholarships, employment support, healthcare initiatives, and financial independence programs. What specific women\'s scheme are you interested in?',
+            'women rights': 'Women\'s rights include equal pay for equal work, protection against sexual harassment, maternity benefits, property rights, and protection against domestic violence.',
+            'maternity': 'The Maternity Benefit Act provides for 26 weeks of paid maternity leave for women employees. The Pradhan Mantri Matru Vandana Yojana provides financial assistance to pregnant and lactating women.',
+            
+            // Financial Inclusion
+            'financial': 'Financial inclusion schemes include no-frills bank accounts, microfinance, insurance schemes, and pension plans for economically disadvantaged sections.',
+            'bank account': 'The Pradhan Mantri Jan Dhan Yojana provides banking services including basic savings bank accounts with no minimum balance requirement, RuPay debit card, and accident insurance cover.',
+            
+            // Rights
+            'rights': 'As a citizen, you have fundamental rights including right to equality, freedom, against exploitation, freedom of religion, cultural and educational rights, and constitutional remedies. What specific rights would you like to know about?',
+            'fundamental rights': 'The fundamental rights guaranteed by the Constitution include Right to Equality, Right to Freedom, Right against Exploitation, Right to Freedom of Religion, Cultural and Educational Rights, and Right to Constitutional Remedies.',
+            'consumer rights': 'Consumer rights include the right to safety, information, choice, representation, redressal, and consumer education. The Consumer Protection Act provides a framework for protecting these rights.',
+            
+            // Farmers
+            'farmer': 'Farmer support schemes include minimum support prices, crop insurance, subsidized loans, and direct benefit transfers. What specific agricultural assistance are you looking for?',
+            'agriculture': 'Agricultural schemes include PM-Kisan which provides income support, Kisan Credit Card for credit access, and Pradhan Mantri Fasal Bima Yojana for crop insurance.',
+            
+            // Default responses
+            'help': 'I can provide information about various government schemes and rights including education, healthcare, employment, housing, senior citizen benefits, women\'s rights, financial inclusion, and more. What topic are you interested in?',
+            'default': 'I don\'t have specific information on that topic yet. You can ask about education schemes, healthcare rights, employment programs, housing assistance, senior citizen benefits, women\'s rights, financial inclusion, or fundamental rights.'
+        };
+        
+        // Show/hide chat window
+        chatButton.addEventListener('click', function() {
+            chatContainer.classList.remove('hidden');
+            chatButton.classList.add('hidden');
+            scrollToBottom();
+        });
+        
+        closeChat.addEventListener('click', function() {
+            chatContainer.classList.add('hidden');
+            chatButton.classList.remove('hidden');
+        });
+        
+        // Send message on button click
+        sendMessage.addEventListener('click', function() {
+            sendUserMessage();
+        });
+        
+        // Send message on Enter key
+        userInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendUserMessage();
+            }
+        });
+        
+        // Handle suggestion chip clicks
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('suggestion-chip')) {
+                userInput.value = e.target.textContent;
+                sendUserMessage();
+            }
+        });
+        
+        function sendUserMessage() {
+            const message = userInput.value.trim();
+            if (message === '') return;
+            
+            // Add user message to chat
+            addMessage(message, 'user');
+            userInput.value = '';
+            
+            // Remove initial suggestions once user starts chatting
+            if (initialSuggestions.style.display !== 'none') {
+                initialSuggestions.style.display = 'none';
+            }
+            
+            // Show typing indicator
+            typingIndicator.style.display = 'block';
+            scrollToBottom();
+            
+            // Simulate AI thinking time
+            setTimeout(function() {
+                typingIndicator.style.display = 'none';
+                
+                // Generate AI response
+                const response = getAIResponse(message.toLowerCase());
+                addMessage(response.text, 'ai');
+                
+                // Add suggestion chips based on the response context
+                if (response.suggestions && response.suggestions.length > 0) {
+                    addSuggestionChips(response.suggestions);
+                }
+            }, 1200); // Consistent delay for readability
+        }
+        
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(sender + '-message');
+            messageDiv.textContent = text;
+            chatBody.appendChild(messageDiv);
+            scrollToBottom();
+        }
+        
+        function addSuggestionChips(suggestions) {
+            const chipsDiv = document.createElement('div');
+            chipsDiv.classList.add('suggestion-chips');
+            
+            suggestions.forEach(suggestion => {
+                const chip = document.createElement('div');
+                chip.classList.add('suggestion-chip');
+                chip.textContent = suggestion;
+                chipsDiv.appendChild(chip);
+            });
+            
+            chatBody.appendChild(chipsDiv);
+            scrollToBottom();
+        }
+        
+        function scrollToBottom() {
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+        
+        function getAIResponse(message) {
+            // Search for keywords in the knowledge base
+            for (const key in knowledgeBase) {
+                if (message.includes(key)) {
+                    // Generate contextual suggestion chips
+                    let suggestions = [];
+                    
+                    if (key === 'education') {
+                        suggestions = ['Scholarships', 'Right to Education', 'Student Loans'];
+                    } else if (key === 'healthcare') {
+                        suggestions = ['Health Insurance', 'Medical Rights', 'Free Healthcare'];
+                    } else if (key === 'employment') {
+                        suggestions = ['Job Programs', 'Skill Development', 'Entrepreneurship Support'];
+                    } else if (key === 'housing') {
+                        suggestions = ['Affordable Housing', 'Home Loan Subsidy', 'Rental Rights'];
+                    } else if (key === 'senior citizen') {
+                        suggestions = ['Pension Schemes', 'Elderly Care', 'Tax Benefits'];
+                    } else if (key === 'women') {
+                        suggestions = ['Women Rights', 'Maternity Benefits', 'Safety Programs'];
+                    } else if (key === 'rights') {
+                        suggestions = ['Fundamental Rights', 'Consumer Rights', 'Right to Information'];
+                    }
+                    
+                    return {
+                        text: knowledgeBase[key],
+                        suggestions: suggestions
+                    };
+                }
+            }
+            
+            // If no match, return default response with general suggestions
+            return {
+                text: knowledgeBase['default'],
+                suggestions: ['Education Schemes', 'Healthcare Rights', 'Employment Programs', 'Housing Assistance']
+            };
+        }
+    });
+</script>
+<!-- <body> -->
+    <!-- Header/Navigation -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html" class="back-button"><i class="fas fa-arrow-left"></i></a>
+                <img src="image/LOGO.png" alt="Sahyog Logo">
+                <h1>SAHYOG</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="schemes.html">Schemes</a></li>
+                    <li><a href="ngo.html" class="active">NGO Help</a></li>
+                    <li><a href="log/index.html">Log in/Sign up</a></li>
+                    <li id="google_translate_element"></li>
+                </ul>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- NGO Hero -->
+    <section class="ngo-hero">
+        <div class="container">
+            <h1>NGO & Local Help Centers</h1>
+            <p>Find organizations that can assist you with scheme applications and documentation</p>
+        </div>
+    </section>
+
+    <!-- NGO Search -->
+    <section class="ngo-search">
+        <div class="container">
+            <div class="search-box">
+                <input type="text" placeholder="Search by location or NGO name...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="filter-options">
+                <select id="state-filter">
+                    <option value="">All States</option>
+                    <option value="up">Uttar Pradesh</option>
+                    <option value="mh">Maharashtra</option>
+                    <option value="br">Bihar</option>
+                    <option value="wb">West Bengal</option>
+                    <option value="mp">Madhya Pradesh</option>
+                </select>
+                <select id="district-filter">
+                    <option value="">All Districts</option>
+                </select>
+                <select id="scheme-filter">
+                    <option value="">All Schemes</option>
+                    <option value="health">Health</option>
+                    <option value="education">Education</option>
+                    <option value="farming">Farming</option>
+                    <option value="housing">Housing</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- NGO Listing -->
+    <section class="ngo-listing">
+        <div class="container">
+            <div class="ngo-grid">
+                <div class="ngo-card">
+                    <div class="ngo-logo">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpt2aARulY9DD3mcQlyRUZCmDRGTe0f30tHg&s" alt="NGO Logo" style="width: 90px; height: 90px;">
+                    </div>
+                    <div class="ngo-info">
+                        <h3>Gramin Vikas Trust</h3>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Lucknow, Uttar Pradesh</p>
+                        <p class="description">Assists with documentation for farming and housing schemes in rural UP.</p>
+                        <div class="schemes">
+                            <span class="scheme-tag">PM-KISAN</span>
+                            <span class="scheme-tag">PMAY-G</span>
+                            <span class="scheme-tag">PMFBY</span>
+                        </div>
+                    </div>
+                    <div class="ngo-contact">
+                        <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                        <p><i class="fas fa-envelope"></i> contact@gvt.org</p>
+                        <a href="#" class="btn secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    </div>
+                </div>
+                
+                <div class="ngo-card">
+                    <div class="ngo-logo">
+                        <img src="image/ngo2.jpeg" alt="NGO Logo" style="width: 90px; height: 90px;">
+                    </div>
+                    <div class="ngo-info">
+                        <h3>Seva Bharati</h3>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Patna, Bihar</p>
+                        <p class="description">Helps with health and education scheme applications across Bihar.</p>
+                        <div class="schemes">
+                            <span class="scheme-tag">PM-JAY</span>
+                            <span class="scheme-tag">Scholarships</span>
+                        </div>
+                    </div>
+                    <div class="ngo-contact">
+                        <p><i class="fas fa-phone"></i> +91 87654 32109</p>
+                        <p><i class="fas fa-envelope"></i> help@sevabharati.org</p>
+                        <a href="#" class="btn secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    </div>
+                </div>
+                
+                <div class="ngo-card">
+                    <div class="ngo-logo">
+                        <img src="image/ngo3.jpeg" alt="NGO Logo" style="width: 90px; height: 90px;">
+                    </div>
+                    <div class="ngo-info">
+                        <h3>Mahila Shakti Kendra</h3>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Pune, Maharashtra</p>
+                        <p class="description">Focuses on women-centric schemes and legal aid services.</p>
+                        <div class="schemes">
+                            <span class="scheme-tag">PMMVY</span>
+                            <span class="scheme-tag">Legal Aid</span>
+                        </div>
+                    </div>
+                    <div class="ngo-contact">
+                        <p><i class="fas fa-phone"></i> +91 76543 21098</p>
+                        <p><i class="fas fa-envelope"></i> info@msk.org</p>
+                        <a href="#" class="btn secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    </div>
+                </div>
+
+                <!-- NGO 5 -->
+                <div class="ngo-card">
+                    <div class="ngo-logo">
+                        <img src="image/ng05.jpeg" alt="NGO Logo" style="width: 90px; height: 90px;">
+                    </div>
+                    <div class="ngo-info">
+                        <h3>Rural Education Foundation</h3>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Jaipur, Rajasthan</p>
+                        <p class="description">Helps students access education schemes and scholarships.</p>
+                        <div class="schemes">
+                            <span class="scheme-tag">Scholarships</span>
+                            <span class="scheme-tag">NSP</span>
+                            <span class="scheme-tag">Mid-Day Meal</span>
+                        </div>
+                    </div>
+                    <div class="ngo-contact">
+                        <p><i class="fas fa-phone"></i> +91 94321 09876</p>
+                        <p><i class="fas fa-envelope"></i> contact@ref.org</p>
+                        <a href="#" class="btn secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    </div>
+                </div>
+                
+                <!-- NGO 6 -->
+                <div class="ngo-card">
+                    <div class="ngo-logo">
+                        <img src="image/ng06.jpg" alt="NGO Logo" style="width: 90px; height: 90px;">
+                    </div>
+                    <div class="ngo-info">
+                        <h3>Gramin Arogya Seva</h3>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Bhopal, Madhya Pradesh</p>
+                        <p class="description">Assists rural communities with health scheme enrollments.</p>
+                        <div class="schemes">
+                            <span class="scheme-tag">PM-JAY</span>
+                            <span class="scheme-tag">NHM</span>
+                            <span class="scheme-tag">Janani Suraksha</span>
+                        </div>
+                    </div>
+                    <div class="ngo-contact">
+                        <p><i class="fas fa-phone"></i> +91 83210 98765</p>
+                        <p><i class="fas fa-envelope"></i> help@gaseva.org</p>
+                        <a href="#" class="btn secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    </div>
+                </div>
+                
+                <!-- NGO 7 -->
+                <div class="ngo-card">
+                    <div class="ngo-logo">
+                        <img src="image/ng07.jpg" alt="NGO Logo" style="width: 90px; height: 90px;">
+                    </div>
+                    <div class="ngo-info">
+                        <h3>Kisan Kalyan Trust</h3>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Nagpur, Maharashtra</p>
+                        <p class="description">Supports farmers with agricultural scheme applications.</p>
+                        <div class="schemes">
+                            <span class="scheme-tag">PM-KISAN</span>
+                            <span class="scheme-tag">PMFBY</span>
+                            <span class="scheme-tag">KCC</span>
+                        </div>
+                    </div>
+                    <div class="ngo-contact">
+                        <p><i class="fas fa-phone"></i> +91 72109 87654</p>
+                        <p><i class="fas fa-envelope"></i> info@kisankalyan.org</p>
+                        <a href="#" class="btn secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    </div>
+                </div>
+                
+                <!-- NGO 8 -->
+                <div class="ngo-card">
+                    <div class="ngo-logo">
+                        <img src="image/ng08.png" alt="NGO Logo" style="width: 90px; height: 90px;">
+                    </div>
+                    <div class="ngo-info">
+                        <h3>Gramin Housing Support</h3>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Hyderabad, Telangana</p>
+                        <p class="description">Helps families access housing schemes in rural areas.</p>
+                        <div class="schemes">
+                            <span class="scheme-tag">PMAY-G</span>
+                            <span class="scheme-tag">Ujjwala</span>
+                            <span class="scheme-tag">Swachh Bharat</span>
+                        </div>
+                    </div>
+                    <div class="ngo-contact">
+                        <p><i class="fas fa-phone"></i> +91 61098 76543</p>
+                        <p><i class="fas fa-envelope"></i> support@graminhousing.org</p>
+                        <a href="#" class="btn secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    </div>
+                </div>
+                
+                <!-- NGO 9 -->
+                <div class="ngo-card">
+                    <div class="ngo-logo">
+                        <img src="image/ngo9.png" alt="NGO Logo" style="width: 90px; height: 90px;">
+                    </div>
+                    <div class="ngo-info">
+                        <h3>Nari Shakti Sangathan</h3>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Bengaluru, Karnataka</p>
+                        <p class="description">Empowers women through awareness of government schemes.</p>
+                        <div class="schemes">
+                            <span class="scheme-tag">PMMVY</span>
+                            <span class="scheme-tag">Ujjwala</span>
+                            <span class="scheme-tag">Sukanya Samriddhi</span>
+                        </div>
+                    </div>
+                    <div class="ngo-contact">
+                        <p><i class="fas fa-phone"></i> +91 50987 65432</p>
+                        <p><i class="fas fa-envelope"></i> contact@narishakti.org</p>
+                        <a href="#" class="btn secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    </div>
+                </div>
+                
+                <div class="ngo-card">
+                    <div class="ngo-logo">
+                        <img src="image/ngo4.webp" alt="NGO Logo" style="width: 90px; height: 150px;">
+                    </div>
+                    <div class="ngo-info">
+                        <h3>Krishi Sahayata Kendra</h3>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Howrah, West Bengal</p>
+                        <p class="description">Specializes in agricultural schemes and farmer welfare programs.</p>
+                        <div class="schemes">
+                            <span class="scheme-tag">PMFBY</span>
+                            <span class="scheme-tag">KCC</span>
+                            <span class="scheme-tag">Soil Health</span>
+                        </div>
+                    </div>
+                    <div class="ngo-contact">
+                        <p><i class="fas fa-phone"></i> +91 65432 10987</p>
+                        <p><i class="fas fa-envelope"></i> support@ksk.org</p>
+                        <a href="#" class="btn secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="ngo-cta">
+        <div class="container">
+            <h2>Are you an NGO that helps with scheme applications?</h2>
+            <p>Join our network to reach more people who need your assistance</p>
+            <a href="#" class="btn primary">Register Your NGO</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo">
+                        <img src="image/LOGO.png" alt="Sahyog Logo" style="width: 90px; height: 90px;">
+                        <h3>SAHYOG</h3>
+                    </div>
+                    <p>Empowering rural India through technology and information.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="schemes.html">Schemes</a></li>
+                        <li><a href="chatbot.html">Chatbot</a></li>
+                        <li><a href="ngo.html">NGO Help</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> contact@sahyog.org</li>
+                        <li><i class="fas fa-phone"></i> +91 1800 123 4567</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Sahyog. All rights reserved. By Team Zero Day</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // NGO search and filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.querySelector('.search-box input');
+            const stateFilter = document.getElementById('state-filter');
+            const districtFilter = document.getElementById('district-filter');
+            const schemeFilter = document.getElementById('scheme-filter');
+            const ngoCards = document.querySelectorAll('.ngo-card');
+            
+            // Sample districts data (in a real app, this would come from an API)
+            const districtsByState = {
+                'up': ['Lucknow', 'Kanpur', 'Varanasi', 'Agra'],
+                'mh': ['Mumbai', 'Pune', 'Nagpur', 'Nashik'],
+                'br': ['Patna', 'Gaya', 'Bhagalpur', 'Muzaffarpur'],
+                'wb': ['Kolkata', 'Howrah', 'Darjeeling', 'Asansol'],
+                'mp': ['Bhopal', 'Indore', 'Jabalpur', 'Gwalior']
+            };
+            
+            // Update districts when state changes
+            stateFilter.addEventListener('change', function() {
+                const state = this.value;
+                districtFilter.innerHTML = '<option value="">All Districts</option>';
+                
+                if (state && districtsByState[state]) {
+                    districtsByState[state].forEach(district => {
+                        const option = document.createElement('option');
+                        option.value = district.toLowerCase();
+                        option.textContent = district;
+                        districtFilter.appendChild(option);
+                    });
+                }
+                
+                filterNGOs();
+            });
+            
+            // Filter NGOs based on search and filters
+            function filterNGOs() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const state = stateFilter.value;
+                const district = districtFilter.value;
+                const scheme = schemeFilter.value;
+                
+                ngoCards.forEach(card => {
+                    const name = card.querySelector('h3').textContent.toLowerCase();
+                    const location = card.querySelector('.location').textContent.toLowerCase();
+                    const description = card.querySelector('.description').textContent.toLowerCase();
+                    const schemes = Array.from(card.querySelectorAll('.scheme-tag')).map(tag => tag.textContent.toLowerCase());
+                    
+                    const matchesSearch = searchTerm === '' || 
+                        name.includes(searchTerm) || 
+                        location.includes(searchTerm) || 
+                        description.includes(searchTerm);
+                    
+                    const matchesState = state === '' || location.includes(state);
+                    const matchesDistrict = district === '' || location.includes(district);
+                    const matchesScheme = scheme === '' || schemes.some(s => s.includes(scheme));
+                    
+                    if (matchesSearch && matchesState && matchesDistrict && matchesScheme) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+            
+            // Add event listeners for filtering
+            searchInput.addEventListener('input', filterNGOs);
+            districtFilter.addEventListener('change', filterNGOs);
+            schemeFilter.addEventListener('change', filterNGOs);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahyog - Government Portal</title>
+    <link rel="shortcut icon" href="../image/LOGO.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="container">
+                <div class="logo">
+                    <a href="../index.html" class="back-button"><i class="fas fa-arrow-left"></i></a>
+                    <div class="logo-content">
+                        <img src="../image/LOGO.png" alt="Sahyog Logo" class="main-logo">
+                        <div class="logo-text">
+                            <h1>SAHYOG</h1>
+                            <p>Register for Government Schemes</p>
+                            <p>Create your account to access all schemes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="auth-container">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="login">Sign In</button>
+                    <button class="tab-btn" data-tab="signup">Sign Up</button>
+                </div>
+
+                <div class="tab-content active" id="login">
+                    <h2>Sign In to Your Account</h2>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="loginEmail">Email or Mobile Number</label>
+                            <input type="text" id="loginEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn">Sign In</button>
+                    </form>
+                </div>
+
+                <div class="tab-content" id="signup">
+                    <h2>Create New Account</h2>
+                    <div class="register-options">
+                        <p class="register-text">or register with</p>
+                        <div class="auth-buttons">
+                            <button type="button" class="auth-btn aadhaar-btn">
+                                <img src="https://uidai.gov.in/images/logo/aadhaar_english_logo.svg" alt="Aadhaar">
+                                Aadhaar
+                            </button>
+                            <button type="button" class="auth-btn digilocker-btn">
+                                <img src="https://media.telanganatoday.com/wp-content/uploads/2022/03/Indias-DigiLocker-app-crosses-100-million-users.jpg" alt="DigiLocker">
+                                DigiLocker
+                            </button>
+                        </div>
+                    </div>
+                    <form id="signupForm">
+                        <div class="step-indicator">
+                            <div class="step active">1</div>
+                            <div class="step-line"></div>
+                            <div class="step">2</div>
+                            <div class="step-line"></div>
+                            <div class="step">3</div>
+                            <div class="step-line"></div>
+                            <div class="step">4</div>
+                            <div class="step-line"></div>
+                            <div class="step">5</div>
+                            <div class="step-line"></div>
+                            <div class="step">6</div>
+                        </div>
+                        
+                        <div class="step-content active" data-step="1">
+                            <h3>Personal Information</h3>
+                            <div class="form-group">
+                                <label for="signupName">Full Name</label>
+                                <input type="text" id="signupName" required>
+                            </div>
+                        </div>
+
+                        <div class="step-content" data-step="2">
+                            <h3>Contact Details</h3>
+                            <div class="form-group">
+                                <label for="signupEmail">Email</label>
+                                <input type="email" id="signupEmail" required>
+                            </div>
+                        </div>
+
+                        <div class="step-content" data-step="3">
+                            <h3>Mobile Verification</h3>
+                            <div class="form-group">
+                                <label for="signupMobile">Mobile Number</label>
+                                <input type="tel" id="signupMobile" required>
+                            </div>
+                        </div>
+
+                        <div class="step-content" data-step="4">
+                            <h3>Security Setup</h3>
+                            <div class="form-group">
+                                <label for="signupPassword">Password</label>
+                                <input type="password" id="signupPassword" required>
+                            </div>
+                        </div>
+
+                        <div class="step-content" data-step="5">
+                            <h3>Confirm Password</h3>
+                            <div class="form-group">
+                                <label for="signupConfirmPassword">Confirm Password</label>
+                                <input type="password" id="signupConfirmPassword" required>
+                            </div>
+                        </div>
+
+                        <div class="step-content" data-step="6">
+                            <h3>Terms and Conditions</h3>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="termsAgreement" required>
+                                    I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="step-navigation">
+                            <button type="button" class="btn btn-secondary" id="prevStep">Previous</button>
+                            <button type="button" class="btn" id="nextStep">Next</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="otp-container" id="otpSection" style="display: none;">
+                <h2>Verify OTP</h2>
+                <p>We have sent an OTP to your registered email/mobile number</p>
+                <form id="otpForm">
+                    <div class="form-group">
+                        <label for="otp">Enter OTP</label>
+                        <input type="text" id="otp" maxlength="6" required>
+                    </div>
+                    <button type="submit" class="btn">Verify OTP</button>
+                </form>
+            </div>
+        </main>
+    </div>
+          <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo">
+                        <img src="../image/LOGO.png" alt="Sahyog Logo" style="width: 100px; height: auto;">
+                        <h3>SAHYOG</h3>
+                    </div>
+                    <p>Empowering rural India through technology and information.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../schemes.html">Schemes</a></li>
+                        <li><a href="../chatbot.html">Chatbot</a></li>
+                        <li><a href="../ngo.html">NGO Help</a></li>
+
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> sahyog@.org</li>
+                        <li><i class="fas fa-phone"></i> +91 1800 123 4567</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Sahyog. All rights reserved. By Team Zero Day</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html> 
+
+<style>
+        /* Add back button styles */
+        .back-button {
+            color: #1e4c88;
+            font-size: 24px;
+            margin-right: 15px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        
+        .back-button:hover {
+            transform: translateX(-5px);
+            color: #0d2b4e;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            gap: 10px;
+        }
+
+        .main-logo {
+            width: 100px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .main-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .logo-text h1 {
+            margin: 0;
+            color: #1e4c88;
+            font-size: 2.5rem;
+        }
+
+        .logo-text p {
+            margin: 5px 0 0;
+            color: #666;
+            font-size: 1rem;
+        }
+</style> 

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Assistance | Sahyog</title>
+    <link rel="shortcut icon" href="image/LOGO.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/chatbot.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en', includedLanguages: 'hi,bn,ta,te,gu,kn,ml,mr,pa,ur'},
+                'google_translate_element'
+            );
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="image/LOGO.png" alt="Sahyog Logo">
+                <h1>SAHYOG</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="schemes.html">Schemes</a></li>
+                    <li><a href="ngo.html">NGO Help</a></li>
+                    <li><a href="log/index.html">Log in/Sign up</a></li>
+                    <li id="google_translate_element"></li>
+                </ul>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Chatbot Hero -->
+    <section class="chatbot-hero">
+        <div class="container">
+            <h1>Sahyak - Your Documentation Assistant</h1>
+            <p>Get step-by-step guidance on documents required for government schemes</p>
+        </div>
+    </section>
+
+    <!-- Chatbot Section -->
+    <section class="chatbot-section">
+        <div class="container">
+            <div class="chatbot-container">
+                <div class="chatbot-header">
+                    <div class="chatbot-avatar">
+                        <img src="image/robot.png" alt="Sahyak">
+                    </div>
+                    <div class="chatbot-info">
+                        <h3>Sahyak</h3>
+                        <p>Online</p>
+                    </div>
+                    <div class="chatbot-actions">
+                        <button id="restart-chat"><i class="fas fa-redo"></i></button>
+                    </div>
+                </div>
+                
+                <div class="chatbot-messages" id="chat-messages">
+                    <div class="message bot-message">
+                        <div class="message-content">
+                            <p>Namaste! I'm Sahyak, your guide to government scheme documentation. How can I help you today?</p>
+                        </div>
+                    </div>
+                    <div class="message bot-message">
+                        <div class="message-content">
+                            <p>You can ask me about:</p>
+                            <div class="quick-options">
+                                <button class="quick-option" data-option="documents">Documents needed for a scheme</button>
+                                <button class="quick-option" data-option="aadhaar">How to get Aadhaar card</button>
+                                <button class="quick-option" data-option="income">How to get income certificate</button>
+                                <button class="quick-option" data-option="land">How to get land records</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chatbot-input">
+                    <input type="text" id="user-input" placeholder="Type your question here...">
+                    <button id="send-message"><i class="fas fa-paper-plane"></i></button>
+                    <button id="voice-input"><i class="fas fa-microphone"></i></button>
+                </div>
+            </div>
+            
+            <div class="chatbot-guides">
+                <h3>Popular Documentation Guides</h3>
+                <div class="guides-grid">
+                    <div class="guide-card">
+                        <div class="guide-icon">
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                        <h4>Aadhaar Card</h4>
+                        <p>Step-by-step process to apply for and download Aadhaar card</p>
+                        <a href="#" class="btn secondary">View Guide</a>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <h4>Income Certificate</h4>
+                        <p>How to apply for income certificate from your district office</p>
+                        <a href="#" class="btn secondary">View Guide</a>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <h4>Land Records</h4>
+                        <p>How to obtain land records and mutation documents</p>
+                        <a href="#" class="btn secondary">View Guide</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo">
+                        <img src="image/LOGO.png" alt="Sahyog Logo" style="width: 90px; height: 90px;">
+                        <h3>SAHYOG</h3>
+                    </div>
+                    <p>Empowering rural India through technology and information.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="schemes.html">Schemes</a></li>
+                        <li><a href="chatbot.html">Chatbot</a></li>
+                        <li><a href="ngo.html">NGO Help</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> contact@sahyog.org</li>
+                        <li><i class="fas fa-phone"></i> +91 1800 123 4567</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Sahyog. All rights reserved. By Team Zero Day</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/chatbot.js"></script>
+</body>
+</html>

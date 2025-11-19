@@ -1,0 +1,2668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Schemes | Sahyog</title>
+    <link rel="shortcut icon" href="image/LOGO.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/schemes.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en', includedLanguages: 'hi,bn,ta,te,gu,kn,ml,mr,pa,ur'},
+                'google_translate_element'
+            );
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        .chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 380px;
+            height: 550px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+        }
+        
+        .chat-header {
+            background-color: #1e4c88;
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-header button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        .chat-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 12px;
+            border-radius: 5px;
+            max-width: 85%;
+            word-wrap: break-word;
+            line-height: 1.4;
+        }
+        
+        .user-message {
+            background-color: #e3f2fd;
+            margin-left: auto;
+            border-bottom-right-radius: 0;
+        }
+        
+        .ai-message {
+            background-color: #f0f0f0;
+            margin-right: auto;
+            border-bottom-left-radius: 0;
+        }
+        
+        .chat-input {
+            display: flex;
+            padding: 12px;
+            border-top: 1px solid #eee;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+        
+        .chat-input button {
+            background-color: #1e4c88;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #1e4c88;
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            font-size: 24px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .typing-indicator {
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: none;
+            width: fit-content;
+        }
+        
+        .typing-indicator span {
+            height: 8px;
+            width: 8px;
+            background-color: #777;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 3px;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+        
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+            margin-right: 0;
+        }
+        
+        .suggestion-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .suggestion-chip {
+            background-color: #e3f2fd;
+            border: 1px solid #1e4c88;
+            color: #1e4c88;
+            border-radius: 18px;
+            padding: 8px 12px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .suggestion-chip:hover {
+            background-color: #bbdefb;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+        
+        .scheme-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .scheme-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn.primary {
+            transition: all 0.3s ease;
+        }
+        
+        .btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Show and style the Google Translate widget */
+        #google_translate_element {
+            display: inline-block !important;
+            vertical-align: middle;
+        }
+        
+        .goog-te-gadget {
+            color: #333 !important;
+            font-size: 0 !important;
+        }
+        
+        .goog-te-gadget .goog-te-combo {
+            margin: 0 !important;
+            padding: 5px !important;
+            border: 1px solid #ddd !important;
+            border-radius: 4px !important;
+            background: #fff !important;
+            font-size: 14px !important;
+            color: #333 !important;
+        }
+        
+        /* Style the language selector text */
+        .goog-te-menu-value {
+            color: #333 !important;
+            border: none !important;
+            text-decoration: none !important;
+        }
+        
+        .goog-te-menu-value span {
+            color: #333 !important;
+        }
+        
+        /* Hide the Google Translate logo */
+        .goog-logo-link {
+            display: none !important;
+        }
+        
+        /* Hide the Google Translate attribution */
+        .goog-te-gadget .goog-te-gadget-simple {
+            background-color: transparent !important;
+            border: none !important;
+        }
+        
+        /* Style the dropdown menu */
+        .goog-te-menu2 {
+            max-width: 100% !important;
+            background: #fff !important;
+            border: 1px solid #ddd !important;
+            border-radius: 4px !important;
+        }
+        
+        .goog-te-menu2-item {
+            padding: 8px !important;
+            color: #333 !important;
+        }
+        
+        .goog-te-menu2-item:hover {
+            background: #f5f5f5 !important;
+        }
+        
+        /* Hide the Google Translate banner */
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+        
+        /* Hide the Google Translate footer */
+        .goog-te-footer {
+            display: none !important;
+        }
+        
+        /* Style the language selector in the navigation */
+        nav ul li#google_translate_element {
+            margin: 0 10px;
+            padding: 0;
+        }
+        
+        .eligibility-form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn.secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .btn.secondary:hover {
+            background: #e0e0e0;
+        }
+        
+        .chat-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-actions button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-actions button:hover {
+            transform: scale(1.1);
+        }
+        
+        .chat-actions button#clearChat {
+            font-size: 16px;
+        }
+        
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+        }
+        
+        .popup-content {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .popup-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1e4c88;
+        }
+        
+        .close-popup {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .popup-body {
+            line-height: 1.6;
+        }
+        
+        .popup-links {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .popup-link {
+            display: inline-block;
+            padding: 8px 15px;
+            background: #1e4c88;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .popup-link:hover {
+            background: #0d2b4e;
+            transform: translateY(-2px);
+        }
+
+        .search-box {
+            display: flex;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .search-box input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-right: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .search-box button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 0 5px 5px 0;
+            transition: background 0.3s;
+        }
+
+        .search-box button:hover {
+            background: #45a049;
+        }
+
+        .voice-btn {
+            background: #2196F3 !important;
+            border-radius: 0 5px 5px 0 !important;
+            margin-left: 2px;
+        }
+
+        .voice-btn:hover {
+            background: #1976D2 !important;
+        }
+
+        .voice-btn.listening {
+            background: #f44336 !important;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Add back button styles */
+        .back-button {
+            color: #1e4c88;
+            font-size: 24px;
+            margin-right: 15px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        
+        .back-button:hover {
+            transform: translateX(-5px);
+            color: #0d2b4e;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Add styles for voice feedback */
+        .voice-btn.listening {
+            animation: pulse 1.5s infinite;
+        }
+        
+        .scheme-card.highlight {
+            animation: highlight 2s ease-out;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes highlight {
+            0% { background-color: rgba(30, 76, 136, 0.1); }
+            100% { background-color: transparent; }
+        }
+        
+        .message {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+        
+        .message.user {
+            background-color: #e3f2fd;
+            margin-left: auto;
+        }
+        
+        .message.assistant {
+            background-color: #f5f5f5;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+<button class="chat-button" id="chatButton">💬</button>
+
+<div class="chat-container hidden" id="chatContainer">
+    <div class="chat-header">
+        <span><img src="image/robot.png" alt="Sahyak" style="width: 30px; height: 30px; vertical-align: middle;"> Sahyak</span>
+        <div class="chat-actions">
+            <button id="clearChat" title="Clear Chat"><i class="fas fa-trash"></i></button>
+        <button id="closeChat">×</button>
+        </div>
+    </div>
+    <div class="chat-body" id="chatBody">
+        <div class="message ai-message">Welcome! I'm here to help you learn about government schemes and your rights as a citizen. What information are you looking for today?</div>
+        
+        <div class="suggestion-chips" id="initialSuggestions">
+            <div class="suggestion-chip">Education Schemes</div>
+            <div class="suggestion-chip">Healthcare Rights</div>
+            <div class="suggestion-chip">Employment Programs</div>
+            <div class="suggestion-chip">Housing Assistance</div>
+            <div class="suggestion-chip">Senior Citizen Benefits</div>
+        </div>
+        
+        <div class="typing-indicator" id="typingIndicator">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Ask about government schemes or rights...">
+        <button id="sendMessage">Send</button>
+    </div>
+</div>
+
+<div class="popup-overlay" id="popupOverlay">
+    <div class="popup-content">
+        <div class="popup-header">
+            <div class="popup-title" id="popupTitle"></div>
+            <button class="close-popup" id="closePopup">×</button>
+        </div>
+        <div class="popup-body" id="popupBody"></div>
+        <div class="popup-links" id="popupLinks"></div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const chatButton = document.getElementById('chatButton');
+        const chatContainer = document.getElementById('chatContainer');
+        const closeChat = document.getElementById('closeChat');
+        const userInput = document.getElementById('userInput');
+        const sendMessage = document.getElementById('sendMessage');
+        const chatBody = document.getElementById('chatBody');
+        const typingIndicator = document.getElementById('typingIndicator');
+        const initialSuggestions = document.getElementById('initialSuggestions');
+        const clearChat = document.getElementById('clearChat');
+        const popupOverlay = document.getElementById('popupOverlay');
+        const popupTitle = document.getElementById('popupTitle');
+        const popupBody = document.getElementById('popupBody');
+        const popupLinks = document.getElementById('popupLinks');
+        const closePopup = document.getElementById('closePopup');
+        
+        // Enhanced Government schemes and rights information database with detailed responses
+        const knowledgeBase = {
+            // Category-based responses
+            "health schemes": {
+                text: "Here are the key health schemes available:\n\n" +
+                      "1. Ayushman Bharat - PM-JAY\n" +
+                      "   - Health insurance coverage of ₹5 lakh per family\n" +
+                      "   - Covers 10.74 crore poor and vulnerable families\n" +
+                      "   - <a href='https://pmjay.gov.in/' target='_blank' class='info-link'>Apply for PM-JAY</a>\n" +
+                      "   - <a href='https://en.wikipedia.org/wiki/Ayushman_Bharat_Yojana' target='_blank' class='info-link'>Learn more about PM-JAY</a>\n\n" +
+                      "2. PMSMA (Pradhan Mantri Surakshit Matritva Abhiyan)\n" +
+                      "   - Free antenatal care services\n" +
+                      "   - Available on 9th of every month\n" +
+                      "   - <a href='https://pmsma.nhp.gov.in/' target='_blank' class='info-link'>Apply for PMSMA</a>\n" +
+                      "   - <a href='https://en.wikipedia.org/wiki/Pradhan_Mantri_Surakshit_Matritva_Abhiyan' target='_blank' class='info-link'>Learn more about PMSMA</a>",
+                suggestions: ["Eligibility Criteria", "Required Documents", "Application Process"]
+            },
+
+            "education schemes": {
+                text: "Here are the key education schemes available:\n\n" +
+                      "1. National Scholarship Portal (NSP)\n" +
+                      "   - One-stop platform for all scholarships\n" +
+                      "   - Covers pre-matric to PhD level\n" +
+                      "   - <a href='https://scholarships.gov.in/' target='_blank' class='info-link'>Apply for Scholarships</a>\n" +
+                      "   - <a href='https://en.wikipedia.org/wiki/National_Scholarship_Portal' target='_blank' class='info-link'>Learn more about NSP</a>\n\n" +
+                      "2. Mid-Day Meal Scheme\n" +
+                      "   - Free lunch for school children\n" +
+                      "   - Benefits 12 crore children\n" +
+                      "   - <a href='https://mdm.nic.in/' target='_blank' class='info-link'>Learn about Mid-Day Meal</a>\n" +
+                      "   - <a href='https://en.wikipedia.org/wiki/Midday_Meal_Scheme' target='_blank' class='info-link'>More information</a>",
+                suggestions: ["Eligibility", "Benefits", "How to Apply"]
+            },
+
+            "farming schemes": {
+                text: "Here are the key farming schemes available:\n\n" +
+                      "1. PMFBY (Pradhan Mantri Fasal Bima Yojana)\n" +
+                      "   - Crop insurance coverage\n" +
+                      "   - Premium rates: 1.5-5%\n" +
+                      "   - <a href='https://pmfby.gov.in/' target='_blank' class='info-link'>Apply for PMFBY</a>\n" +
+                      "   - <a href='https://en.wikipedia.org/wiki/Pradhan_Mantri_Fasal_Bima_Yojana' target='_blank' class='info-link'>Learn more about PMFBY</a>\n\n" +
+                      "2. Kisan Credit Card (KCC)\n" +
+                      "   - Credit up to ₹3 lakh\n" +
+                      "   - Flexible repayment options\n" +
+                      "   - <a href='https://www.agricoop.nic.in/en/schemes/kisan-credit-card' target='_blank' class='info-link'>Apply for KCC</a>\n" +
+                      "   - <a href='https://en.wikipedia.org/wiki/Kisan_Credit_Card' target='_blank' class='info-link'>Learn more about KCC</a>",
+                suggestions: ["Eligibility", "Documents Required", "Application Process"]
+            },
+
+            "housing schemes": {
+                text: "Here are the key housing schemes available:\n\n" +
+                      "1. PMAY (Pradhan Mantri Awas Yojana)\n" +
+                      "   - ₹1.2 lakh assistance per house\n" +
+                      "   - Targets 2.95 crore houses\n" +
+                      "   - <a href='https://pmaymis.gov.in/' target='_blank' class='info-link'>Apply for PMAY</a>\n" +
+                      "   - <a href='https://en.wikipedia.org/wiki/Pradhan_Mantri_Awas_Yojana' target='_blank' class='info-link'>Learn more about PMAY</a>\n\n" +
+                      "2. CLSS (Credit Linked Subsidy Scheme)\n" +
+                      "   - Interest subsidy: 3-6.5%\n" +
+                      "   - For EWS/LIG/MIG\n" +
+                      "   - <a href='https://pmaymis.gov.in/' target='_blank' class='info-link'>Apply for CLSS</a>\n" +
+                      "   - <a href='https://en.wikipedia.org/wiki/Pradhan_Mantri_Awas_Yojana#Credit_Linked_Subsidy_Scheme_(CLSS)' target='_blank' class='info-link'>Learn more about CLSS</a>",
+                suggestions: ["Eligibility", "Benefits", "How to Apply"]
+            },
+
+            "women schemes": {
+                text: "Here are the key schemes for women:\n\n" +
+                      "1. PMMVY (Pradhan Mantri Matru Vandana Yojana)\n" +
+                      "   - ₹5,000 in three installments\n" +
+                      "   - For pregnant and lactating women\n" +
+                      "   - <a href='https://pmmvy.nic.in/' target='_blank' class='info-link'>Apply for PMMVY</a>\n" +
+                      "   - <a href='https://en.wikipedia.org/wiki/Pradhan_Mantri_Matru_Vandana_Yojana' target='_blank' class='info-link'>Learn more about PMMVY</a>\n\n" +
+                      "2. Mahila Shakti Kendra (MSK)\n" +
+                      "   - Women empowerment programs\n" +
+                      "   - Skill development initiatives\n" +
+                      "   - <a href='https://wcd.nic.in/schemes/mahila-shakti-kendra-msk' target='_blank' class='info-link'>Learn about MSK</a>\n" +
+                      "   - <a href='https://en.wikipedia.org/wiki/Mahila_Shakti_Kendra' target='_blank' class='info-link'>More information</a>",
+                suggestions: ["Eligibility", "Benefits", "How to Apply"]
+            },
+
+            "employment schemes": {
+                text: "Here are the key employment schemes available:\n\n" +
+                      "1. PMKVY (Pradhan Mantri Kaushal Vikas Yojana)\n" +
+                      "   - Skill training for youth (15-35 years)\n" +
+                      "   - Industry-relevant certification\n" +
+                      "   - <a href='https://www.pmkvyofficial.org/' target='_blank' class='info-link'>Apply for PMKVY</a>\n" +
+                      "   - <a href='https://en.wikipedia.org/wiki/Pradhan_Mantri_Kaushal_Vikas_Yojana' target='_blank' class='info-link'>Learn more about PMKVY</a>\n\n" +
+                      "2. MGNREGA\n" +
+                      "   - 100 days of guaranteed employment\n" +
+                      "   - ₹202 daily wage\n" +
+                      "   - <a href='https://nrega.nic.in/' target='_blank' class='info-link'>Apply for MGNREGA</a>\n" +
+                      "   - <a href='https://en.wikipedia.org/wiki/Mahatma_Gandhi_National_Rural_Employment_Guarantee_Act' target='_blank' class='info-link'>Learn more about MGNREGA</a>",
+                suggestions: ["Eligibility", "Benefits", "How to Apply"]
+            },
+
+            "senior citizen schemes": {
+                text: "Here are the key schemes for senior citizens:\n\n" +
+                      "1. NPS (National Pension System)\n" +
+                      "   - Voluntary pension scheme\n" +
+                      "   - For ages 18-70 years\n" +
+                      "   - <a href='https://www.npscra.nsdl.co.in/' target='_blank' class='info-link'>Apply for NPS</a>\n" +
+                      "   - <a href='https://en.wikipedia.org/wiki/National_Pension_System' target='_blank' class='info-link'>Learn more about NPS</a>\n\n" +
+                      "2. Rashtriya Vayoshri Yojana\n" +
+                      "   - Assisted living devices\n" +
+                      "   - For BPL senior citizens\n" +
+                      "   - <a href='https://socialjustice.gov.in/schemes/11' target='_blank' class='info-link'>Apply for Vayoshri</a>\n" +
+                      "   - <a href='https://en.wikipedia.org/wiki/Rashtriya_Vayoshri_Yojana' target='_blank' class='info-link'>Learn more about Vayoshri</a>",
+                suggestions: ["Eligibility", "Benefits", "How to Apply"]
+            },
+
+            "financial schemes": {
+                text: "Here are the key financial schemes available:\n\n" +
+                      "1. PMJDY (Pradhan Mantri Jan Dhan Yojana)\n" +
+                      "   - Zero balance bank accounts\n" +
+                      "   - RuPay debit cards\n" +
+                      "   - <a href='https://pmjdy.gov.in/' target='_blank' class='info-link'>Apply for PMJDY</a>\n" +
+                      "   - <a href='https://en.wikipedia.org/wiki/Pradhan_Mantri_Jan_Dhan_Yojana' target='_blank' class='info-link'>Learn more about PMJDY</a>\n\n" +
+                      "2. APY (Atal Pension Yojana)\n" +
+                      "   - Monthly pension: ₹1,000-5,000\n" +
+                      "   - For unorganized sector workers\n" +
+                      "   - <a href='https://www.jansuraksha.gov.in/' target='_blank' class='info-link'>Apply for APY</a>\n" +
+                      "   - <a href='https://en.wikipedia.org/wiki/Atal_Pension_Yojana' target='_blank' class='info-link'>Learn more about APY</a>",
+                suggestions: ["Eligibility", "Benefits", "How to Apply"]
+            },
+
+            "digital schemes": {
+                text: "Here are the key digital schemes available:\n\n" +
+                      "1. Digital India\n" +
+                      "   - Digital infrastructure and services\n" +
+                      "   - Digital empowerment\n" +
+                      "   - <a href='https://digitalindia.gov.in/' target='_blank' class='info-link'>Learn about Digital India</a>\n" +
+                      "   - <a href='https://en.wikipedia.org/wiki/Digital_India' target='_blank' class='info-link'>More information</a>\n\n" +
+                      "2. DigiLocker\n" +
+                      "   - Digital document storage\n" +
+                      "   - Secure document sharing\n" +
+                      "   - <a href='https://digilocker.gov.in/' target='_blank' class='info-link'>Create DigiLocker Account</a>\n" +
+                      "   - <a href='https://en.wikipedia.org/wiki/DigiLocker' target='_blank' class='info-link'>Learn more about DigiLocker</a>\n\n" +
+                      "3. UMANG\n" +
+                      "   - Unified government services\n" +
+                      "   - Mobile app for all services\n" +
+                      "   - <a href='https://web.umang.gov.in/' target='_blank' class='info-link'>Access UMANG Services</a>\n" +
+                      "   - <a href='https://en.wikipedia.org/wiki/UMANG' target='_blank' class='info-link'>Learn more about UMANG</a>",
+                suggestions: ["Features", "How to Use", "Benefits"]
+            },
+            
+            // Default responses
+            "help": "I can provide detailed information about various government schemes. Please select a category:\n\n" +
+                   "1. Health Schemes\n" +
+                   "2. Education Schemes\n" +
+                   "3. Farming Schemes\n" +
+                   "4. Housing Schemes\n" +
+                   "5. Women Schemes\n" +
+                   "6. Employment Schemes\n" +
+                   "7. Senior Citizen Schemes\n" +
+                   "8. Financial Schemes\n" +
+                   "9. Digital Schemes",
+            "default": "I can help you with information about government schemes. Please select a category or ask about a specific scheme."
+        };
+        
+        // Show/hide chat window
+        chatButton.addEventListener('click', function() {
+            chatContainer.classList.remove('hidden');
+            chatButton.classList.add('hidden');
+            scrollToBottom();
+        });
+        
+        closeChat.addEventListener('click', function() {
+            chatContainer.classList.add('hidden');
+            chatButton.classList.remove('hidden');
+        });
+        
+        // Send message on button click
+        sendMessage.addEventListener('click', function() {
+            sendUserMessage();
+        });
+        
+        // Send message on Enter key
+        userInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendUserMessage();
+            }
+        });
+        
+        // Handle suggestion chip clicks
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('suggestion-chip')) {
+                const schemeName = e.target.textContent.toLowerCase();
+                if (schemeDetails[schemeName]) {
+                    showSchemeDetails(schemeDetails[schemeName]);
+                } else {
+                userInput.value = e.target.textContent;
+                sendUserMessage();
+                }
+            }
+        });
+        
+        // Clear chat history
+        clearChat.addEventListener('click', function() {
+            // Clear all messages except the initial welcome message
+            const messages = chatBody.querySelectorAll('.message');
+            messages.forEach(message => {
+                if (!message.classList.contains('ai-message') || !message.textContent.includes('Welcome!')) {
+                    message.remove();
+                }
+            });
+            
+            // Show initial suggestions again
+            initialSuggestions.style.display = 'flex';
+            
+            // Scroll to bottom
+            scrollToBottom();
+        });
+        
+        function sendUserMessage() {
+            const message = userInput.value.trim();
+            if (message === '') return;
+            
+            // Add user message to chat
+            addMessage(message, 'user');
+            userInput.value = '';
+            
+            // Remove initial suggestions once user starts chatting
+            if (initialSuggestions.style.display !== 'none') {
+                initialSuggestions.style.display = 'none';
+            }
+            
+            // Show typing indicator
+            typingIndicator.style.display = 'block';
+            scrollToBottom();
+            
+            // Simulate AI thinking time
+            setTimeout(function() {
+                typingIndicator.style.display = 'none';
+                
+                // Generate AI response
+                const response = getAIResponse(message.toLowerCase());
+                addMessage(response.text, 'ai');
+                
+                // Add suggestion chips based on the response context
+                if (response.suggestions && response.suggestions.length > 0) {
+                    addSuggestionChips(response.suggestions);
+                }
+            }, 1200); // Consistent delay for readability
+        }
+        
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(sender + '-message');
+            messageDiv.innerHTML = text;
+            chatBody.appendChild(messageDiv);
+            scrollToBottom();
+        }
+        
+        function addSuggestionChips(suggestions) {
+            const chipsDiv = document.createElement('div');
+            chipsDiv.classList.add('suggestion-chips');
+            
+            suggestions.forEach(suggestion => {
+                const chip = document.createElement('div');
+                chip.classList.add('suggestion-chip');
+                chip.textContent = suggestion;
+                chipsDiv.appendChild(chip);
+            });
+            
+            chatBody.appendChild(chipsDiv);
+            scrollToBottom();
+        }
+        
+        function scrollToBottom() {
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+        
+        function getAIResponse(message) {
+            // Convert message to lowercase and remove extra spaces
+            message = message.toLowerCase().trim();
+            
+            // Check for category-based queries
+            if (message.includes('health') || message.includes('medical')) {
+                return {
+                    text: "Here are the key health schemes available:\n\n" +
+                          "1. Ayushman Bharat - PM-JAY\n" +
+                          "   - Health insurance coverage of ₹5 lakh per family\n" +
+                          "   - Covers 10.74 crore poor and vulnerable families\n" +
+                          "   - <a href='https://pmjay.gov.in/' target='_blank' class='info-link'>Apply for PM-JAY</a>\n" +
+                          "   - <a href='https://en.wikipedia.org/wiki/Ayushman_Bharat_Yojana' target='_blank' class='info-link'>Learn more about PM-JAY</a>\n\n" +
+                          "2. PMSMA (Pradhan Mantri Surakshit Matritva Abhiyan)\n" +
+                          "   - Free antenatal care services\n" +
+                          "   - Available on 9th of every month\n" +
+                          "   - <a href='https://pmsma.nhp.gov.in/' target='_blank' class='info-link'>Apply for PMSMA</a>\n" +
+                          "   - <a href='https://en.wikipedia.org/wiki/Pradhan_Mantri_Surakshit_Matritva_Abhiyan' target='_blank' class='info-link'>Learn more about PMSMA</a>",
+                    suggestions: ["Eligibility Criteria", "Required Documents", "Application Process"]
+                };
+            } else if (message.includes('education') || message.includes('school') || message.includes('college')) {
+                return {
+                    text: "Here are the key education schemes available:\n\n" +
+                          "1. National Scholarship Portal (NSP)\n" +
+                          "   - One-stop platform for all scholarships\n" +
+                          "   - Covers pre-matric to PhD level\n" +
+                          "   - <a href='https://scholarships.gov.in/' target='_blank' class='info-link'>Apply for Scholarships</a>\n" +
+                          "   - <a href='https://en.wikipedia.org/wiki/National_Scholarship_Portal' target='_blank' class='info-link'>Learn more about NSP</a>\n\n" +
+                          "2. Mid-Day Meal Scheme\n" +
+                          "   - Free lunch for school children\n" +
+                          "   - Benefits 12 crore children\n" +
+                          "   - <a href='https://mdm.nic.in/' target='_blank' class='info-link'>Learn about Mid-Day Meal</a>\n" +
+                          "   - <a href='https://en.wikipedia.org/wiki/Midday_Meal_Scheme' target='_blank' class='info-link'>More information</a>",
+                    suggestions: ["Eligibility", "Benefits", "How to Apply"]
+                };
+            } else if (message.includes('farming') || message.includes('agriculture') || message.includes('farmer')) {
+                return {
+                    text: "Here are the key farming schemes available:\n\n" +
+                          "1. PMFBY (Pradhan Mantri Fasal Bima Yojana)\n" +
+                          "   - Crop insurance coverage\n" +
+                          "   - Premium rates: 1.5-5%\n" +
+                          "   - <a href='https://pmfby.gov.in/' target='_blank' class='info-link'>Apply for PMFBY</a>\n" +
+                          "   - <a href='https://en.wikipedia.org/wiki/Pradhan_Mantri_Fasal_Bima_Yojana' target='_blank' class='info-link'>Learn more about PMFBY</a>\n\n" +
+                          "2. Kisan Credit Card (KCC)\n" +
+                          "   - Credit up to ₹3 lakh\n" +
+                          "   - Flexible repayment options\n" +
+                          "   - <a href='https://www.agricoop.nic.in/en/schemes/kisan-credit-card' target='_blank' class='info-link'>Apply for KCC</a>\n" +
+                          "   - <a href='https://en.wikipedia.org/wiki/Kisan_Credit_Card' target='_blank' class='info-link'>Learn more about KCC</a>",
+                    suggestions: ["Eligibility", "Documents Required", "Application Process"]
+                };
+            } else if (message.includes('housing') || message.includes('house')) {
+                return {
+                    text: "Here are the key housing schemes available:\n\n" +
+                          "1. PMAY (Pradhan Mantri Awas Yojana)\n" +
+                          "   - ₹1.2 lakh assistance per house\n" +
+                          "   - Targets 2.95 crore houses\n" +
+                          "   - <a href='https://pmaymis.gov.in/' target='_blank' class='info-link'>Apply for PMAY</a>\n" +
+                          "   - <a href='https://en.wikipedia.org/wiki/Pradhan_Mantri_Awas_Yojana' target='_blank' class='info-link'>Learn more about PMAY</a>\n\n" +
+                          "2. CLSS (Credit Linked Subsidy Scheme)\n" +
+                          "   - Interest subsidy: 3-6.5%\n" +
+                          "   - For EWS/LIG/MIG\n" +
+                          "   - <a href='https://pmaymis.gov.in/' target='_blank' class='info-link'>Apply for CLSS</a>\n" +
+                          "   - <a href='https://en.wikipedia.org/wiki/Pradhan_Mantri_Awas_Yojana#Credit_Linked_Subsidy_Scheme_(CLSS)' target='_blank' class='info-link'>Learn more about CLSS</a>",
+                    suggestions: ["Eligibility", "Benefits", "How to Apply"]
+                };
+            } else if (message.includes('women') || message.includes('female')) {
+                return {
+                    text: "Here are the key schemes for women:\n\n" +
+                          "1. PMMVY (Pradhan Mantri Matru Vandana Yojana)\n" +
+                          "   - ₹5,000 in three installments\n" +
+                          "   - For pregnant and lactating women\n" +
+                          "   - <a href='https://pmmvy.nic.in/' target='_blank' class='info-link'>Apply for PMMVY</a>\n" +
+                          "   - <a href='https://en.wikipedia.org/wiki/Pradhan_Mantri_Matru_Vandana_Yojana' target='_blank' class='info-link'>Learn more about PMMVY</a>\n\n" +
+                          "2. Mahila Shakti Kendra (MSK)\n" +
+                          "   - Women empowerment programs\n" +
+                          "   - Skill development initiatives\n" +
+                          "   - <a href='https://wcd.nic.in/schemes/mahila-shakti-kendra-msk' target='_blank' class='info-link'>Learn about MSK</a>\n" +
+                          "   - <a href='https://en.wikipedia.org/wiki/Mahila_Shakti_Kendra' target='_blank' class='info-link'>More information</a>",
+                    suggestions: ["Eligibility", "Benefits", "How to Apply"]
+                };
+            } else if (message.includes('employment') || message.includes('job') || message.includes('work')) {
+                return {
+                    text: "Here are the key employment schemes available:\n\n" +
+                          "1. PMKVY (Pradhan Mantri Kaushal Vikas Yojana)\n" +
+                          "   - Skill training for youth (15-35 years)\n" +
+                          "   - Industry-relevant certification\n" +
+                          "   - <a href='https://www.pmkvyofficial.org/' target='_blank' class='info-link'>Apply for PMKVY</a>\n" +
+                          "   - <a href='https://en.wikipedia.org/wiki/Pradhan_Mantri_Kaushal_Vikas_Yojana' target='_blank' class='info-link'>Learn more about PMKVY</a>\n\n" +
+                          "2. MGNREGA\n" +
+                          "   - 100 days of guaranteed employment\n" +
+                          "   - ₹202 daily wage\n" +
+                          "   - <a href='https://nrega.nic.in/' target='_blank' class='info-link'>Apply for MGNREGA</a>\n" +
+                          "   - <a href='https://en.wikipedia.org/wiki/Mahatma_Gandhi_National_Rural_Employment_Guarantee_Act' target='_blank' class='info-link'>Learn more about MGNREGA</a>",
+                    suggestions: ["Eligibility", "Benefits", "How to Apply"]
+                };
+            } else if (message.includes('senior') || message.includes('old') || message.includes('pension')) {
+                return {
+                    text: "Here are the key schemes for senior citizens:\n\n" +
+                          "1. NPS (National Pension System)\n" +
+                          "   - Voluntary pension scheme\n" +
+                          "   - For ages 18-70 years\n" +
+                          "   - <a href='https://www.npscra.nsdl.co.in/' target='_blank' class='info-link'>Apply for NPS</a>\n" +
+                          "   - <a href='https://en.wikipedia.org/wiki/National_Pension_System' target='_blank' class='info-link'>Learn more about NPS</a>\n\n" +
+                          "2. Rashtriya Vayoshri Yojana\n" +
+                          "   - Assisted living devices\n" +
+                          "   - For BPL senior citizens\n" +
+                          "   - <a href='https://socialjustice.gov.in/schemes/11' target='_blank' class='info-link'>Apply for Vayoshri</a>\n" +
+                          "   - <a href='https://en.wikipedia.org/wiki/Rashtriya_Vayoshri_Yojana' target='_blank' class='info-link'>Learn more about Vayoshri</a>",
+                    suggestions: ["Eligibility", "Benefits", "How to Apply"]
+                };
+            } else if (message.includes('financial') || message.includes('bank') || message.includes('money')) {
+                return {
+                    text: "Here are the key financial schemes available:\n\n" +
+                          "1. PMJDY (Pradhan Mantri Jan Dhan Yojana)\n" +
+                          "   - Zero balance bank accounts\n" +
+                          "   - RuPay debit cards\n" +
+                          "   - <a href='https://pmjdy.gov.in/' target='_blank' class='info-link'>Apply for PMJDY</a>\n" +
+                          "   - <a href='https://en.wikipedia.org/wiki/Pradhan_Mantri_Jan_Dhan_Yojana' target='_blank' class='info-link'>Learn more about PMJDY</a>\n\n" +
+                          "2. APY (Atal Pension Yojana)\n" +
+                          "   - Monthly pension: ₹1,000-5,000\n" +
+                          "   - For unorganized sector workers\n" +
+                          "   - <a href='https://www.jansuraksha.gov.in/' target='_blank' class='info-link'>Apply for APY</a>\n" +
+                          "   - <a href='https://en.wikipedia.org/wiki/Atal_Pension_Yojana' target='_blank' class='info-link'>Learn more about APY</a>",
+                    suggestions: ["Eligibility", "Benefits", "How to Apply"]
+                };
+            } else if (message.includes('digital') || message.includes('online') || message.includes('internet')) {
+                return {
+                    text: "Here are the key digital schemes available:\n\n" +
+                          "1. Digital India\n" +
+                          "   - Digital infrastructure and services\n" +
+                          "   - Digital empowerment\n" +
+                          "   - <a href='https://digitalindia.gov.in/' target='_blank' class='info-link'>Learn about Digital India</a>\n" +
+                          "   - <a href='https://en.wikipedia.org/wiki/Digital_India' target='_blank' class='info-link'>More information</a>\n\n" +
+                          "2. DigiLocker\n" +
+                          "   - Digital document storage\n" +
+                          "   - Secure document sharing\n" +
+                          "   - <a href='https://digilocker.gov.in/' target='_blank' class='info-link'>Create DigiLocker Account</a>\n" +
+                          "   - <a href='https://en.wikipedia.org/wiki/DigiLocker' target='_blank' class='info-link'>Learn more about DigiLocker</a>\n\n" +
+                          "3. UMANG\n" +
+                          "   - Unified government services\n" +
+                          "   - Mobile app for all services\n" +
+                          "   - <a href='https://web.umang.gov.in/' target='_blank' class='info-link'>Access UMANG Services</a>\n" +
+                          "   - <a href='https://en.wikipedia.org/wiki/UMANG' target='_blank' class='info-link'>Learn more about UMANG</a>",
+                    suggestions: ["Features", "How to Use", "Benefits"]
+                };
+            }
+            
+            // Search for specific scheme keywords
+            for (const key in knowledgeBase) {
+                if (message.includes(key) && key !== 'help' && key !== 'default') {
+                    const response = knowledgeBase[key];
+                    return {
+                        text: response.text,
+                        suggestions: response.suggestions || []
+                    };
+                }
+            }
+            
+            return {
+                text: "I can help you with information about government schemes. Please select a category:\n\n" +
+                      "1. Health Schemes\n" +
+                      "2. Education Schemes\n" +
+                      "3. Farming Schemes\n" +
+                      "4. Housing Schemes\n" +
+                      "5. Women Schemes\n" +
+                      "6. Employment Schemes\n" +
+                      "7. Senior Citizen Schemes\n" +
+                      "8. Financial Schemes\n" +
+                      "9. Digital Schemes",
+                suggestions: ['Health Schemes', 'Education Schemes', 'Farming Schemes', 'Housing Schemes']
+            };
+        }
+
+        // Add CSS for the info links
+        const style = document.createElement('style');
+        style.textContent = `
+            .info-link {
+                color: #1e4c88;
+                text-decoration: underline;
+                font-weight: bold;
+                display: inline-block;
+                margin-top: 10px;
+                margin-right: 15px;
+            }
+            .info-link:hover {
+                color: #0d2b4e;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Enhanced scheme details database
+        const schemeDetails = {
+            "ayushman bharat": {
+                title: "Ayushman Bharat - PM-JAY",
+                details: "Ayushman Bharat - Pradhan Mantri Jan Arogya Yojana (PM-JAY) is the world's largest health insurance scheme. Key features:\n\n" +
+                        "• Health insurance coverage of ₹5 lakh per family per year\n" +
+                        "• Covers secondary and tertiary care hospitalization\n" +
+                        "• Benefits 10.74 crore poor and vulnerable families\n" +
+                        "• Cashless and paperless access to healthcare\n" +
+                        "• Covers pre-existing conditions\n" +
+                        "• No restrictions on family size, age or gender\n\n" +
+                        "Eligibility:\n" +
+                        "• Families listed in SECC database\n" +
+                        "• No income criteria for rural families\n" +
+                        "• Urban families with specific occupational categories\n\n" +
+                        "Required Documents:\n" +
+                        "• Aadhaar Card\n" +
+                        "• Ration Card\n" +
+                        "• Income Certificate (if applicable)",
+                applyLink: "https://pmjay.gov.in/",
+                learnLink: "https://en.wikipedia.org/wiki/Ayushman_Bharat_Yojana"
+            },
+            // ... other scheme details ...
+        };
+        
+        // Show scheme details in popup
+        function showSchemeDetails(scheme) {
+            popupTitle.textContent = scheme.title;
+            popupBody.innerHTML = scheme.details.replace(/\n/g, '<br>');
+            
+            popupLinks.innerHTML = `
+                <a href="${scheme.applyLink}" target="_blank" class="popup-link">Apply for this scheme</a>
+                <a href="${scheme.learnLink}" target="_blank" class="popup-link">Learn more</a>
+            `;
+            
+            popupOverlay.style.display = 'block';
+        }
+        
+        // Close popup
+        closePopup.addEventListener('click', function() {
+            popupOverlay.style.display = 'none';
+        });
+        
+        // Close popup when clicking outside
+        popupOverlay.addEventListener('click', function(e) {
+            if (e.target === popupOverlay) {
+                popupOverlay.style.display = 'none';
+            }
+        });
+
+        function filterSchemesByCategory(category) {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const schemeCards = document.querySelectorAll('.scheme-card');
+            
+            tabBtns.forEach(btn => {
+                if (btn.dataset.category === category) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            schemeCards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function processVoiceCommand(command) {
+            // ... existing code ...
+
+            if (command.includes('show') || command.includes('display')) {
+                if (command.includes('health')) {
+                    filterSchemesByCategory('health');
+                    addMessage("Showing health schemes...", 'ai');
+                    voiceStatus.textContent = 'Showing health schemes';
+                } else if (command.includes('education')) {
+                    filterSchemesByCategory('education');
+                    addMessage("Showing education schemes...", 'ai');
+                    voiceStatus.textContent = 'Showing education schemes';
+                } else if (command.includes('farming')) {
+                    filterSchemesByCategory('farming');
+                    addMessage("Showing farming schemes...", 'ai');
+                    voiceStatus.textContent = 'Showing farming schemes';
+                } else if (command.includes('housing')) {
+                    filterSchemesByCategory('housing');
+                    addMessage("Showing housing schemes...", 'ai');
+                    voiceStatus.textContent = 'Showing housing schemes';
+                } else if (command.includes('women')) {
+                    filterSchemesByCategory('women');
+                    addMessage("Showing women schemes...", 'ai');
+                    voiceStatus.textContent = 'Showing women schemes';
+                } else if (command.includes('employment')) {
+                    filterSchemesByCategory('employment');
+                    addMessage("Showing employment schemes...", 'ai');
+                    voiceStatus.textContent = 'Showing employment schemes';
+                } else if (command.includes('senior')) {
+                    filterSchemesByCategory('senior');
+                    addMessage("Showing senior citizen schemes...", 'ai');
+                    voiceStatus.textContent = 'Showing senior citizen schemes';
+                } else if (command.includes('financial')) {
+                    filterSchemesByCategory('financial');
+                    addMessage("Showing financial schemes...", 'ai');
+                    voiceStatus.textContent = 'Showing financial schemes';
+                } else if (command.includes('digital')) {
+                    filterSchemesByCategory('digital');
+                    addMessage("Showing digital schemes...", 'ai');
+                    voiceStatus.textContent = 'Showing digital schemes';
+                } else if (command.includes('all')) {
+                    filterSchemesByCategory('all');
+                    addMessage("Showing all schemes...", 'ai');
+                    voiceStatus.textContent = 'Showing all schemes';
+                }
+            }
+            // ... rest of the existing code ...
+        }
+
+        // Add bulk data processing function
+        function processBulkData(data) {
+            const recommendations = [];
+            
+            // Show the eligibility form
+            const eligibilityCheck = document.getElementById('eligibility-check');
+            const eligibilityForm = document.getElementById('eligibilityForm');
+            eligibilityCheck.checked = true;
+            eligibilityForm.classList.remove('hidden');
+
+            // Create a dropdown to select different people
+            const selectPerson = document.createElement('select');
+            selectPerson.id = 'personSelector';
+            selectPerson.className = 'form-control';
+            const defaultOption = document.createElement('option');
+            defaultOption.text = 'Select a person...';
+            defaultOption.value = '';
+            selectPerson.appendChild(defaultOption);
+
+            data.forEach((person, index) => {
+                const option = document.createElement('option');
+                option.text = person.name;
+                option.value = index;
+                selectPerson.appendChild(option);
+            });
+
+            // Add the selector before the form
+            const formContainer = document.getElementById('userDetailsForm');
+            formContainer.insertBefore(selectPerson, formContainer.firstChild);
+
+            // Add change event listener to the selector
+            selectPerson.addEventListener('change', function() {
+                if (this.value === '') return;
+                
+                const selectedPerson = data[this.value];
+                
+                // Map income ranges
+                let incomeRange;
+                if (selectedPerson.income === '30-60' || selectedPerson.income === '60-10') {
+                    incomeRange = '300001-600000';
+                } else if (selectedPerson.income === 'above150' || selectedPerson.income === 'above 150') {
+                    incomeRange = '1500001+';
+                } else {
+                    incomeRange = '600001-1000000';
+                }
+
+                // Fill form fields
+                document.getElementById('name').value = selectedPerson.name;
+                document.getElementById('age').value = selectedPerson.age;
+                document.getElementById('caste').value = selectedPerson.caste.toLowerCase();
+                document.getElementById('sex').value = selectedPerson.sex.toLowerCase();
+                document.getElementById('income').value = incomeRange;
+                document.getElementById('idType').value = 'aadhar';
+                document.getElementById('state').value = selectedPerson.state.toLowerCase();
+                document.getElementById('city').value = selectedPerson.city || '';
+                document.getElementById('pincode').value = '000000'; // Default pincode
+                document.getElementById('idNumber').value = '1234 5678 9012'; // Default Aadhar
+
+                // Automatically trigger form submission
+                const formData = {
+                    name: selectedPerson.name,
+                    age: parseInt(selectedPerson.age),
+                    caste: selectedPerson.caste.toLowerCase(),
+                    sex: selectedPerson.sex.toLowerCase(),
+                    income: incomeRange,
+                    idType: 'aadhar',
+                    state: selectedPerson.state,
+                    city: selectedPerson.city || ''
+                };
+
+                // Get eligible schemes for this person
+                const eligibleSchemes = getPersonalizedSchemes(formData);
+                displayPersonRecommendations(selectedPerson.name, eligibleSchemes);
+            });
+
+            // Add styles for the selector
+            const style = document.createElement('style');
+            style.textContent += `
+                #personSelector {
+                    width: 100%;
+                    padding: 10px;
+                    margin-bottom: 20px;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    font-size: 16px;
+                }
+                #personSelector:focus {
+                    border-color: #1e4c88;
+                    outline: none;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        function getPersonalizedSchemes(userData) {
+            const allEligibleSchemes = [];
+            
+            // Prioritize health schemes first
+            const categories = [
+                { check: checkHealthEligibility(userData), type: 'health', basePriority: 5 },  // Increased priority
+                { check: checkEducationEligibility(userData), type: 'education', basePriority: 2 },
+                { check: checkFarmingEligibility(userData), type: 'farming', basePriority: 2 },
+                { check: checkWomenEligibility(userData), type: 'women', basePriority: 1 },
+                { check: checkEmploymentEligibility(userData), type: 'employment', basePriority: 1 },
+                { check: checkFinancialEligibility(userData), type: 'financial', basePriority: 1 }
+            ];
+
+            categories.forEach(category => {
+                if (category.check.eligible) {
+                    let adjustedPriority = category.basePriority + category.check.priority;
+
+                    category.check.schemes.forEach(scheme => {
+                        // Give extra priority to specific health schemes
+                        if (scheme.includes('PMSMA') || scheme.includes('PM-JAY')) {
+                            adjustedPriority += 3;
+                        }
+
+                        allEligibleSchemes.push({
+                            name: scheme,
+                            priority: adjustedPriority,
+                            category: category.type,
+                            description: getSchemeDescription(scheme)
+                        });
+                    });
+                }
+            });
+
+            // Sort by priority and ensure health schemes are included
+            allEligibleSchemes.sort((a, b) => b.priority - a.priority);
+            
+            // Ensure PMSMA and PM-JAY are included if eligible
+            let finalSchemes = [];
+            const healthSchemes = allEligibleSchemes.filter(s => 
+                (s.name.includes('PMSMA') || s.name.includes('PM-JAY')) && s.category === 'health'
+            );
+            
+            // Add health schemes first
+            finalSchemes.push(...healthSchemes);
+
+            // Add other schemes until we have 4 total
+            allEligibleSchemes.forEach(scheme => {
+                if (finalSchemes.length < 4 && 
+                    !finalSchemes.some(s => s.name === scheme.name)) {
+                    finalSchemes.push(scheme);
+                }
+            });
+
+            return finalSchemes;
+        }
+
+        function checkHealthEligibility(userData) {
+            const income = userData.income;
+            const sex = userData.sex.toLowerCase();
+
+            // Define health schemes with descriptions
+            const schemes = [
+                "Ayushman Bharat - Pradhan Mantri Jan Arogya Yojana (PM-JAY)",
+                "Pradhan Mantri Surakshit Matritva Abhiyan (PMSMA)"
+            ];
+
+            // More inclusive eligibility criteria for health schemes
+            if (income === '300001-600000' || income === '0-300000' || income === '600001-1000000') {
+                return {
+                    eligible: true,
+                    schemes: schemes,
+                    priority: 4  // High base priority for health schemes
+                };
+            }
+
+            return { eligible: false, schemes: [], priority: 0 };
+        }
+
+        function getSchemeDescription(schemeName) {
+            const descriptions = {
+                "Ayushman Bharat - Pradhan Mantri Jan Arogya Yojana (PM-JAY)": 
+                    "Health insurance coverage of ₹5 lakh per family per year for secondary and tertiary care hospitalization. Benefits 10.74 crore poor and vulnerable families.",
+                "Pradhan Mantri Surakshit Matritva Abhiyan (PMSMA)": 
+                    "Free antenatal care services for pregnant women on the 9th of every month at government health facilities. Includes free medical check-ups and required treatments."
+            };
+            return descriptions[schemeName] || "";
+        }
+
+        function checkEducationEligibility(userData) {
+            const age = parseInt(userData.age);
+            const income = userData.income;
+            const caste = userData.caste.toLowerCase();
+
+            // Enhanced education schemes
+            const schemes = [
+                "National Scholarship Portal (NSP)",
+                "Mid-Day Meal Scheme",
+                "Post-Matric Scholarship",
+                "Pre-Matric Scholarship"
+            ];
+
+            // More inclusive eligibility criteria
+            if (age <= 35) {  // Extended age limit
+                if (income === '300001-600000' || income === '0-300000') {
+                    return {
+                        eligible: true,
+                        schemes: schemes,
+                        priority: caste === 'sc' || caste === 'st' ? 3 : 2
+                    };
+                }
+            }
+
+            return { eligible: false, schemes: [], priority: 0 };
+        }
+
+        function checkFarmingEligibility(userData) {
+            const income = userData.income;
+
+            // Enhanced farming schemes
+            const schemes = [
+                "Pradhan Mantri Fasal Bima Yojana (PMFBY)",
+                "Kisan Credit Card (KCC)",
+                "PM Kisan Samman Nidhi",
+                "National Agriculture Market (eNAM)"
+            ];
+
+            // More inclusive eligibility criteria
+            if (income === '300001-600000' || income === '0-300000' || income === '600001-1000000') {
+                return {
+                    eligible: true,
+                    schemes: schemes,
+                    priority: 3
+                };
+            }
+
+            return { eligible: false, schemes: [], priority: 0 };
+        }
+
+        function checkWomenEligibility(userData) {
+            const age = parseInt(userData.age);
+            const income = parseInt(userData.income.split('-')[0]);
+            
+            if (userData.sex === 'female') {
+                if (age >= 18 && age <= 45) {
+                    if (income <= 300000) {
+                        return {
+                            eligible: true,
+                            schemes: ['Pradhan Mantri Matru Vandana Yojana', 'Mahila Shakti Kendra'],
+                            priority: 1
+                        };
+                    } else if (income <= 600000) {
+                        return {
+                            eligible: true,
+                            schemes: ['Mahila Shakti Kendra'],
+                            priority: 2
+                        };
+                    }
+                }
+            }
+            
+            return { eligible: false, schemes: [], priority: 0 };
+        }
+
+        function checkEmploymentEligibility(userData) {
+            const age = parseInt(userData.age);
+            const income = parseInt(userData.income.split('-')[0]);
+            
+            if (age >= 18 && age <= 45) {
+                if (income <= 300000) {
+                    return {
+                        eligible: true,
+                        schemes: ['Pradhan Mantri Kaushal Vikas Yojana', 'Mahatma Gandhi National Rural Employment Guarantee Act'],
+                        priority: 1
+                    };
+                } else if (income <= 600000) {
+                    return {
+                        eligible: true,
+                        schemes: ['Pradhan Mantri Kaushal Vikas Yojana'],
+                        priority: 2
+                    };
+                }
+            }
+            
+            return { eligible: false, schemes: [], priority: 0 };
+        }
+
+        function checkFinancialEligibility(userData) {
+            const income = parseInt(userData.income.split('-')[0]);
+            
+            if (income <= 300000) {
+                return {
+                    eligible: true,
+                    schemes: ['Pradhan Mantri Jan Dhan Yojana', 'Atal Pension Yojana'],
+                    priority: 1
+                };
+            } else if (income <= 600000) {
+                return {
+                    eligible: true,
+                    schemes: ['Atal Pension Yojana'],
+                    priority: 2
+                };
+            }
+            
+            return { eligible: false, schemes: [], priority: 0 };
+        }
+
+        function displayPersonRecommendations(name, schemes) {
+            const resultsDiv = document.createElement('div');
+            resultsDiv.className = 'person-recommendations';
+            
+            let html = `<h3>${name}'s Recommended Schemes:</h3>`;
+            
+            // Group schemes by category
+            const healthSchemes = schemes.filter(s => s.category === 'health');
+            const otherSchemes = schemes.filter(s => s.category !== 'health');
+
+            // Display Health Schemes first
+            if (healthSchemes.length > 0) {
+                html += `
+                    <div class="scheme-category-group health">
+                        <h4>Health Schemes</h4>
+                        <ul>
+                            ${healthSchemes.map(scheme => `
+                                <li>
+                                    <div class="scheme-recommendation">
+                                        <h5>${scheme.name}</h5>
+                                        <p class="scheme-description">${scheme.description}</p>
+                                        <div class="scheme-priority">Priority Level: ${scheme.priority}</div>
+                                        <div class="scheme-actions">
+                                            <a href="#" class="btn-apply">Apply Now</a>
+                                            <a href="#" class="btn-details">View Details</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            // Display Other Schemes
+            if (otherSchemes.length > 0) {
+                html += `
+                    <div class="scheme-category-group other">
+                        <h4>Other Relevant Schemes</h4>
+                        <ul>
+                            ${otherSchemes.map(scheme => `
+                                <li>
+                                    <div class="scheme-recommendation">
+                                        <h5>${scheme.name}</h5>
+                                        <span class="scheme-category">${scheme.category}</span>
+                                        <div class="scheme-priority">Priority Level: ${scheme.priority}</div>
+                                    </div>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            resultsDiv.innerHTML = html;
+
+            // Update styles
+            const style = document.createElement('style');
+            style.textContent += `
+                .scheme-category-group.health {
+                    border-left: 4px solid #E91E63;
+                    background: #fce4ec;
+                }
+                .scheme-recommendation {
+                    background: white;
+                    padding: 15px;
+                    margin-bottom: 12px;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                }
+                .scheme-description {
+                    color: #666;
+                    margin: 8px 0;
+                    font-size: 14px;
+                    line-height: 1.4;
+                }
+                .scheme-actions {
+                    margin-top: 12px;
+                    display: flex;
+                    gap: 10px;
+                }
+                .btn-apply, .btn-details {
+                    padding: 6px 12px;
+                    border-radius: 4px;
+                    text-decoration: none;
+                    font-size: 14px;
+                }
+                .btn-apply {
+                    background: #E91E63;
+                    color: white;
+                }
+                .btn-details {
+                    background: #f5f5f5;
+                    color: #333;
+                }
+                .scheme-priority {
+                    color: #E91E63;
+                    font-weight: bold;
+                    font-size: 12px;
+                    margin-top: 5px;
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Update or create the recommendations container
+            let container = document.querySelector('.recommendations-container');
+            if (!container) {
+                container = document.createElement('div');
+                container.className = 'recommendations-container';
+                document.querySelector('.schemes-grid').insertBefore(container, document.querySelector('.schemes-grid').firstChild);
+            }
+            container.innerHTML = '';
+            container.appendChild(resultsDiv);
+        }
+
+        // Example usage with your data
+        const sampleData = [
+            {
+                name: "Ankit",
+                age: "35",
+                caste: "General",
+                sex: "Male",
+                income: "30-60",
+                state: "Bihar",
+                city: "Patna"
+            },
+            {
+                name: "Anmol",
+                age: "34",
+                caste: "OBC",
+                sex: "Female",
+                income: "60-10",
+                state: "Punjab",
+                city: "Mohali"
+            },
+            {
+                name: "Suhani",
+                age: "28",
+                caste: "ST",
+                sex: "Female",
+                income: "above150",
+                state: "Kerala",
+                city: ""
+            },
+            {
+                name: "Naira",
+                age: "19",
+                caste: "SC",
+                sex: "Female",
+                income: "above150",
+                state: "Kerala",
+                city: ""
+            }
+        ];
+
+        // Add button to process bulk data
+        const bulkProcessButton = document.createElement('button');
+        bulkProcessButton.textContent = 'Process Sample Data';
+        bulkProcessButton.className = 'btn primary';
+        bulkProcessButton.style.marginBottom = '20px';
+        bulkProcessButton.onclick = () => processBulkData(sampleData);
+
+        // Add button to the page
+        const searchFilter = document.querySelector('.search-filter');
+        searchFilter.insertBefore(bulkProcessButton, searchFilter.firstChild);
+    });
+</script>
+<!-- <body> -->
+    <!-- Header/Navigation -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html" class="back-button"><i class="fas fa-arrow-left"></i></a>
+                <img src="image/LOGO.png" alt="Sahyog Logo">
+                <h1>SAHYOG</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="schemes.html" class="active">Schemes</a></li>
+                    <li><a href="ngo.html">NGO Help</a></li>
+                    <li><a href="log/index.html">Log in/Sign up</a></li>
+                    <li id="google_translate_element"></li>
+                </ul>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Schemes Hero -->
+    <section class="schemes-hero">
+        <div class="container">
+            <h1>Government Schemes for You</h1>
+            <p>Discover and apply for schemes you're eligible for</p>
+        </div>
+    </section>
+
+    <!-- Scheme Categories -->
+    <section class="scheme-categories">
+        <div class="container">
+            <div class="category-tabs">
+                <button class="tab-btn active" data-category="all">All Schemes</button>
+                <button class="tab-btn" data-category="health">Health</button>
+                <button class="tab-btn" data-category="education">Education</button>
+                <button class="tab-btn" data-category="farming">Farming</button>
+                <button class="tab-btn" data-category="housing">Housing</button>
+                <button class="tab-btn" data-category="women">Women</button>
+                <button class="tab-btn" data-category="employment">Employment</button>
+                <button class="tab-btn" data-category="senior">Senior Citizens</button>
+                <button class="tab-btn" data-category="financial">Financial</button>
+                <button class="tab-btn" data-category="digital">Digital</button>
+            </div>
+            
+            <div class="search-filter">
+                <div class="search-box">
+                    <input type="text" placeholder="Search schemes...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                    <button class="voice-btn" id="voiceAssistant"><i class="fas fa-microphone"></i></button>
+                </div>
+                <div class="eligibility-filter">
+                    <label>
+                        <input type="checkbox" id="eligibility-check">
+                        Show only schemes I'm eligible for
+                    </label>
+                    <div class="eligibility-form hidden" id="eligibilityForm">
+                        <form id="userDetailsForm">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="caste">Caste Category</label>
+                                <select id="caste" name="caste" required>
+                                    <option value="">Select Caste</option>
+                                    <option value="general">General</option>
+                                    <option value="obc">OBC</option>
+                                    <option value="sc">SC</option>
+                                    <option value="st">ST</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="age">Age</label>
+                                <input type="number" id="age" name="age" min="0" max="120" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="sex">Sex</label>
+                                <select id="sex" name="sex" required>
+                                    <option value="">Select Sex</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="income">Family Income (P.A.)</label>
+                                <select id="income" name="income" required>
+                                    <option value="">Select Income Range</option>
+                                    <option value="0-300000">₹0 - ₹3,00,000</option>
+                                    <option value="300001-600000">₹3,00,001 - ₹6,00,000</option>
+                                    <option value="600001-1000000">₹6,00,001 - ₹10,00,000</option>
+                                    <option value="1000001-1500000">₹10,00,001 - ₹15,00,000</option>
+                                    <option value="1500001+">Above ₹15,00,000</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="idType">Government Valid I.D.</label>
+                                <select id="idType" name="idType" required>
+                                    <option value="">Select I.D. Type</option>
+                                    <option value="aadhar">Aadhar Card</option>
+                                    <option value="voter">Voter ID</option>
+                                    <option value="pan">PAN Card</option>
+                                    <option value="ration">Ration Card</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="idNumber">I.D. Number</label>
+                                <input type="text" id="idNumber" name="idNumber" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <select id="state" name="state" required>
+                                    <option value="">Select State</option>
+                                    <option value="andhra">Andhra Pradesh</option>
+                                    <option value="arunachal">Arunachal Pradesh</option>
+                                    <option value="assam">Assam</option>
+                                    <option value="bihar">Bihar</option>
+                                    <option value="chhattisgarh">Chhattisgarh</option>
+                                    <option value="delhi">Delhi</option>
+                                    <option value="goa">Goa</option>
+                                    <option value="gujarat">Gujarat</option>
+                                    <option value="haryana">Haryana</option>
+                                    <option value="himachal">Himachal Pradesh</option>
+                                    <option value="jharkhand">Jharkhand</option>
+                                    <option value="karnataka">Karnataka</option>
+                                    <option value="kerala">Kerala</option>
+                                    <option value="madhya">Madhya Pradesh</option>
+                                    <option value="maharashtra">Maharashtra</option>
+                                    <option value="manipur">Manipur</option>
+                                    <option value="meghalaya">Meghalaya</option>
+                                    <option value="mizoram">Mizoram</option>
+                                    <option value="nagaland">Nagaland</option>
+                                    <option value="odisha">Odisha</option>
+                                    <option value="punjab">Punjab</option>
+                                    <option value="rajasthan">Rajasthan</option>
+                                    <option value="sikkim">Sikkim</option>
+                                    <option value="tamil">Tamil Nadu</option>
+                                    <option value="telangana">Telangana</option>
+                                    <option value="tripura">Tripura</option>
+                                    <option value="uttar">Uttar Pradesh</option>
+                                    <option value="uttarakhand">Uttarakhand</option>
+                                    <option value="west">West Bengal</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" id="city" name="city" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="pincode">Pin Code</label>
+                                <input type="text" id="pincode" name="pincode" pattern="[0-9]{6}" required>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn primary">Check Eligibility</button>
+                                <button type="button" class="btn secondary" id="cancelForm">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="schemes-grid">
+                <!-- Health Category -->
+                <div class="scheme-card" data-category="health">
+                    <div class="scheme-badge health">Health</div>
+                    <h3>Ayushman Bharat - Pradhan Mantri Jan Arogya Yojana (PM-JAY)</h3>
+                    <p>Health insurance scheme providing coverage of ₹5 lakh per family per year for secondary and tertiary care hospitalization.</p>
+                    <div class="scheme-meta">
+                        <span><i class="fas fa-rupee-sign"></i> Up to ₹5 Lakh</span>
+                        <span><i class="fas fa-users"></i> 10.74 Crore Families</span>
+                    </div>
+                    <a href="https://en.wikipedia.org/wiki/Ayushman_Bharat_Yojana" target="_blank" class="btn primary">View Details</a>
+                </div>
+                
+                <div class="scheme-card" data-category="health">
+                    <div class="scheme-badge health">Health</div>
+                    <h3>Pradhan Mantri Surakshit Matritva Abhiyan (PMSMA)</h3>
+                    <p>Free antenatal care services for pregnant women on the 9th of every month at government health facilities.</p>
+                    <div class="scheme-meta">
+                        <span><i class="fas fa-rupee-sign"></i> Free Services</span>
+                        <span><i class="fas fa-users"></i> All Pregnant Women</span>
+                    </div>
+                    <a href="https://en.wikipedia.org/wiki/Pradhan_Mantri_Surakshit_Matritva_Abhiyan" target="_blank" class="btn primary">View Details</a>
+                </div>
+
+                <!-- Education Category -->
+                <div class="scheme-card" data-category="education">
+                    <div class="scheme-badge education">Education</div>
+                    <h3>National Scholarship Portal</h3>
+                    <p>One-stop platform for various scholarships offered by central and state governments for students from pre-matric to PhD level.</p>
+                    <div class="scheme-meta">
+                        <span><i class="fas fa-rupee-sign"></i> Varies</span>
+                        <span><i class="fas fa-users"></i> All Students</span>
+                    </div>
+                    <a href="https://en.wikipedia.org/wiki/National_Scholarship_Portal" target="_blank" class="btn primary">View Details</a>
+                </div>
+                
+                <div class="scheme-card" data-category="education">
+                    <div class="scheme-badge education">Education</div>
+                    <h3>Mid-Day Meal Scheme</h3>
+                    <p>Provides free lunch to school children to improve nutritional status and encourage school attendance.</p>
+                    <div class="scheme-meta">
+                        <span><i class="fas fa-rupee-sign"></i> Free Meals</span>
+                        <span><i class="fas fa-users"></i> 12 Crore Children</span>
+                    </div>
+                    <a href="https://en.wikipedia.org/wiki/Midday_Meal_Scheme" target="_blank" class="btn primary">View Details</a>
+                </div>
+
+                <!-- Farming Category -->
+                <div class="scheme-card" data-category="farming">
+                    <div class="scheme-badge farming">Farming</div>
+                    <h3>Pradhan Mantri Fasal Bima Yojana (PMFBY)</h3>
+                    <p>Crop insurance scheme providing comprehensive risk coverage against natural calamities. Premium rates are 1.5-5% of the sum insured.</p>
+                    <div class="scheme-meta">
+                        <span><i class="fas fa-rupee-sign"></i> 1.5-5% Premium</span>
+                        <span><i class="fas fa-users"></i> All Farmers</span>
+                    </div>
+                    <a href="https://en.wikipedia.org/wiki/Pradhan_Mantri_Fasal_Bima_Yojana" target="_blank" class="btn primary">View Details</a>
+                </div>
+                
+                <div class="scheme-card" data-category="farming">
+                    <div class="scheme-badge farming">Farming</div>
+                    <h3>Kisan Credit Card (KCC)</h3>
+                    <p>Provides farmers with timely access to credit for agricultural needs with flexible repayment options. Credit up to ₹3 lakh.</p>
+                    <div class="scheme-meta">
+                        <span><i class="fas fa-rupee-sign"></i> Up to ₹3 Lakh</span>
+                        <span><i class="fas fa-users"></i> 7.5 Crore Farmers</span>
+                    </div>
+                    <a href="https://en.wikipedia.org/wiki/Kisan_Credit_Card" target="_blank" class="btn primary">View Details</a>
+                </div>
+
+                <!-- Housing Category -->
+                <div class="scheme-card" data-category="housing">
+                    <div class="scheme-badge housing">Housing</div>
+                    <h3>Pradhan Mantri Awas Yojana - Gramin (PMAY-G)</h3>
+                    <p>Scheme to provide pucca houses with basic amenities to all rural houseless households and those living in kutcha houses. ₹1.2 lakh assistance per house and targets 2.95 crore houses.</p>
+                    <div class="scheme-meta">
+                        <span><i class="fas fa-rupee-sign"></i> ₹1.2 Lakh Assistance</span>
+                        <span><i class="fas fa-users"></i> 2.95 Crore Houses</span>
+                    </div>
+                    <a href="https://en.wikipedia.org/wiki/Pradhan_Mantri_Awas_Yojana" target="_blank" class="btn primary">View Details</a>
+                </div>
+                
+                <div class="scheme-card" data-category="housing">
+                    <div class="scheme-badge housing">Housing</div>
+                    <h3>Credit Linked Subsidy Scheme (CLSS)</h3>
+                    <p>Interest subsidy on home loans for economically weaker sections and low/middle-income groups. 3-6.5% interest subsidy.</p>
+                    <div class="scheme-meta">
+                        <span><i class="fas fa-rupee-sign"></i> 3-6.5% Interest Subsidy</span>
+                        <span><i class="fas fa-users"></i> EWS/LIG/MIG</span>
+                    </div>
+                    <a href="https://en.wikipedia.org/wiki/Pradhan_Mantri_Awas_Yojana#Credit_Linked_Subsidy_Scheme_(CLSS)" target="_blank" class="btn primary">View Details</a>
+                </div>
+
+                <!-- Women Category -->
+                <div class="scheme-card" data-category="women">
+                    <div class="scheme-badge women">Women</div>
+                    <h3>Pradhan Mantri Matru Vandana Yojana (PMMVY)</h3>
+                    <p>Maternity benefit program providing ₹5,000 in three installments to pregnant and lactating women for their first live birth.</p>
+                    <div class="scheme-meta">
+                        <span><i class="fas fa-rupee-sign"></i> ₹5,000</span>
+                        <span><i class="fas fa-users"></i> Pregnant Women</span>
+                    </div>
+                    <a href="https://en.wikipedia.org/wiki/Pradhan_Mantri_Matru_Vandana_Yojana" target="_blank" class="btn primary">View Details</a>
+                </div>
+                
+                <div class="scheme-card" data-category="women">
+                    <div class="scheme-badge women">Women</div>
+                    <h3>Mahila Shakti Kendra (MSK)</h3>
+                    <p>Empowerment scheme for rural women through community participation, awareness generation, and skill development programs.</p>
+                    <div class="scheme-meta">
+                        <span><i class="fas fa-rupee-sign"></i> Varies</span>
+                        <span><i class="fas fa-users"></i> Rural Women</span>
+                    </div>
+                    <a href="https://en.wikipedia.org/wiki/Mahila_Shakti_Kendra" target="_blank" class="btn primary">View Details</a>
+                </div>
+
+                <!-- New Schemes -->
+                <div class="scheme-card" data-category="employment">
+                    <div class="scheme-badge employment">Employment</div>
+                    <h3>Pradhan Mantri Kaushal Vikas Yojana (PMKVY)</h3>
+                    <p>Skill development scheme providing industry-relevant training to youth with certification and financial rewards.</p>
+                    <div class="scheme-meta">
+                        <span><i class="fas fa-rupee-sign"></i> Free Training</span>
+                        <span><i class="fas fa-users"></i> Youth (15-35 years)</span>
+                    </div>
+                    <a href="https://en.wikipedia.org/wiki/Pradhan_Mantri_Kaushal_Vikas_Yojana" target="_blank" class="btn primary">View Details</a>
+                </div>
+
+                <div class="scheme-card" data-category="employment">
+                    <div class="scheme-badge employment">Employment</div>
+                    <h3>Mahatma Gandhi National Rural Employment Guarantee Act (MGNREGA)</h3>
+                    <p>Guarantees 100 days of wage employment in a financial year to rural households. ₹202 daily wage.</p>
+                    <div class="scheme-meta">
+                        <span><i class="fas fa-rupee-sign"></i> ₹202 Daily Wage</span>
+                        <span><i class="fas fa-users"></i> Rural Households</span>
+                    </div>
+                    <a href="https://en.wikipedia.org/wiki/Mahatma_Gandhi_National_Rural_Employment_Guarantee_Act" target="_blank" class="btn primary">View Details</a>
+                </div>
+
+                <div class="scheme-card" data-category="senior">
+                    <div class="scheme-badge senior">Senior Citizens</div>
+                    <h3>National Pension System (NPS)</h3>
+                    <p>Voluntary pension scheme providing regular income after retirement with tax benefits.</p>
+                    <div class="scheme-meta">
+                        <span><i class="fas fa-rupee-sign"></i> Flexible Contributions</span>
+                        <span><i class="fas fa-users"></i> 18-70 years</span>
+                    </div>
+                    <a href="https://en.wikipedia.org/wiki/National_Pension_System" target="_blank" class="btn primary">View Details</a>
+                </div>
+
+                <div class="scheme-card" data-category="senior">
+                    <div class="scheme-badge senior">Senior Citizens</div>
+                    <h3>Rashtriya Vayoshri Yojana</h3>
+                    <p>Provides assisted living devices to senior citizens belonging to BPL category.</p>
+                    <div class="scheme-meta">
+                        <span><i class="fas fa-rupee-sign"></i> Free Devices</span>
+                        <span><i class="fas fa-users"></i> BPL Senior Citizens</span>
+                    </div>
+                    <a href="https://en.wikipedia.org/wiki/Rashtriya_Vayoshri_Yojana" target="_blank" class="btn primary">View Details</a>
+                </div>
+
+                <div class="scheme-card" data-category="financial">
+                    <div class="scheme-badge financial">Financial</div>
+                    <h3>Pradhan Mantri Jan Dhan Yojana (PMJDY)</h3>
+                    <p>Financial inclusion scheme providing basic banking services, insurance, and pension to all.</p>
+                    <div class="scheme-meta">
+                        <span><i class="fas fa-rupee-sign"></i> Zero Balance Account</span>
+                        <span><i class="fas fa-users"></i> All Citizens</span>
+                    </div>
+                    <a href="https://en.wikipedia.org/wiki/Pradhan_Mantri_Jan_Dhan_Yojana" target="_blank" class="btn primary">View Details</a>
+                </div>
+
+                <div class="scheme-card" data-category="financial">
+                    <div class="scheme-badge financial">Financial</div>
+                    <h3>Atal Pension Yojana (APY)</h3>
+                    <p>Pension scheme for unorganized sector workers providing fixed monthly pension after 60 years.</p>
+                    <div class="scheme-meta">
+                        <span><i class="fas fa-rupee-sign"></i> ₹1,000-5,000 Monthly</span>
+                        <span><i class="fas fa-users"></i> 18-40 years</span>
+                    </div>
+                    <a href="https://en.wikipedia.org/wiki/Atal_Pension_Yojana" target="_blank" class="btn primary">View Details</a>
+                </div>
+
+                <div class="scheme-card" data-category="digital">
+                    <div class="scheme-badge digital">Digital</div>
+                    <h3>Digital India</h3>
+                    <p>Flagship program to transform India into a digitally empowered society, providing digital infrastructure and services to citizens.</p>
+                    <div class="scheme-meta">
+                        <span><i class="fas fa-rupee-sign"></i> Various Benefits</span>
+                        <span><i class="fas fa-users"></i> All Citizens</span>
+                    </div>
+                    <a href="https://en.wikipedia.org/wiki/Digital_India" target="_blank" class="btn primary">View Details</a>
+                </div>
+
+                <div class="scheme-card" data-category="digital">
+                    <div class="scheme-badge digital">Digital</div>
+                    <h3>DigiLocker</h3>
+                    <p>Digital document storage and sharing platform for citizens to store important documents.</p>
+                    <div class="scheme-meta">
+                        <span><i class="fas fa-rupee-sign"></i> Free Storage</span>
+                        <span><i class="fas fa-users"></i> All Citizens</span>
+                    </div>
+                    <a href="https://en.wikipedia.org/wiki/DigiLocker" target="_blank" class="btn primary">View Details</a>
+                </div>
+
+                <div class="scheme-card" data-category="digital">
+                    <div class="scheme-badge digital">Digital</div>
+                    <h3>UMANG (Unified Mobile Application for New-age Governance)</h3>
+                    <p>Single platform for accessing government services across various departments.</p>
+                    <div class="scheme-meta">
+                        <span><i class="fas fa-rupee-sign"></i> Free Services</span>
+                        <span><i class="fas fa-users"></i> All Citizens</span>
+                    </div>
+                    <a href="https://en.wikipedia.org/wiki/UMANG" target="_blank" class="btn primary">View Details</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo">
+                        <img src="image/LOGO.png" alt="Sahyog Logo" style="width: 90px; height: 90px;">
+                        <h3>SAHYOG</h3>
+                    </div>
+                    <p>Empowering rural India through technology and information.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="schemes.html">Schemes</a></li>
+                        <li><a href="chatbot.html">Chatbot</a></li>
+                        <li><a href="ngo.html">NGO Help</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> contact@sahyog.org</li>
+                        <li><i class="fas fa-phone"></i> +91 1800 123 4567</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Sahyog. All rights reserved. By Team Zero Day</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const eligibilityCheck = document.getElementById('eligibility-check');
+            const eligibilityForm = document.getElementById('eligibilityForm');
+            const cancelForm = document.getElementById('cancelForm');
+            const userDetailsForm = document.getElementById('userDetailsForm');
+            
+            // Show/hide eligibility form
+            eligibilityCheck.addEventListener('change', function() {
+                if (this.checked) {
+                    eligibilityForm.classList.remove('hidden');
+                } else {
+                    eligibilityForm.classList.add('hidden');
+                }
+            });
+            
+            // Cancel form
+            cancelForm.addEventListener('click', function() {
+                eligibilityForm.classList.add('hidden');
+                eligibilityCheck.checked = false;
+            });
+            
+            // Handle form submission
+            userDetailsForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = {
+                    name: document.getElementById('name').value,
+                    caste: document.getElementById('caste').value,
+                    age: document.getElementById('age').value,
+                    sex: document.getElementById('sex').value,
+                    income: document.getElementById('income').value,
+                    idType: document.getElementById('idType').value,
+                    idNumber: document.getElementById('idNumber').value,
+                    state: document.getElementById('state').value,
+                    city: document.getElementById('city').value,
+                    pincode: document.getElementById('pincode').value
+                };
+                
+                // Filter schemes based on eligibility
+                filterSchemesByEligibility(formData);
+                
+                // Hide form after submission
+                eligibilityForm.classList.add('hidden');
+            });
+            
+            function filterSchemesByEligibility(userData) {
+                const schemeCards = document.querySelectorAll('.scheme-card');
+                const eligibleSchemes = [];
+                
+                // Check eligibility for each category
+                const healthEligibility = checkHealthEligibility(userData);
+                const educationEligibility = checkEducationEligibility(userData);
+                const farmingEligibility = checkFarmingEligibility(userData);
+                const housingEligibility = checkHousingEligibility(userData);
+                const womenEligibility = checkWomenEligibility(userData);
+                const employmentEligibility = checkEmploymentEligibility(userData);
+                const seniorEligibility = checkSeniorEligibility(userData);
+                const financialEligibility = checkFinancialEligibility(userData);
+                
+                // Collect all eligible schemes with their priorities
+                const allEligibleSchemes = [];
+                
+                if (healthEligibility.eligible) {
+                    healthEligibility.schemes.forEach(scheme => {
+                        allEligibleSchemes.push({
+                            name: scheme,
+                            priority: healthEligibility.priority,
+                            category: 'health'
+                        });
+                    });
+                }
+                
+                if (educationEligibility.eligible) {
+                    educationEligibility.schemes.forEach(scheme => {
+                        allEligibleSchemes.push({
+                            name: scheme,
+                            priority: educationEligibility.priority,
+                            category: 'education'
+                        });
+                    });
+                }
+                
+                if (farmingEligibility.eligible) {
+                    farmingEligibility.schemes.forEach(scheme => {
+                        allEligibleSchemes.push({
+                            name: scheme,
+                            priority: farmingEligibility.priority,
+                            category: 'farming'
+                        });
+                    });
+                }
+                
+                if (housingEligibility.eligible) {
+                    housingEligibility.schemes.forEach(scheme => {
+                        allEligibleSchemes.push({
+                            name: scheme,
+                            priority: housingEligibility.priority,
+                            category: 'housing'
+                        });
+                    });
+                }
+                
+                if (womenEligibility.eligible) {
+                    womenEligibility.schemes.forEach(scheme => {
+                        allEligibleSchemes.push({
+                            name: scheme,
+                            priority: womenEligibility.priority,
+                            category: 'women'
+                        });
+                    });
+                }
+                
+                if (employmentEligibility.eligible) {
+                    employmentEligibility.schemes.forEach(scheme => {
+                        allEligibleSchemes.push({
+                            name: scheme,
+                            priority: employmentEligibility.priority,
+                            category: 'employment'
+                        });
+                    });
+                }
+                
+                if (seniorEligibility.eligible) {
+                    seniorEligibility.schemes.forEach(scheme => {
+                        allEligibleSchemes.push({
+                            name: scheme,
+                            priority: seniorEligibility.priority,
+                            category: 'senior'
+                        });
+                    });
+                }
+                
+                if (financialEligibility.eligible) {
+                    financialEligibility.schemes.forEach(scheme => {
+                        allEligibleSchemes.push({
+                            name: scheme,
+                            priority: financialEligibility.priority,
+                            category: 'financial'
+                        });
+                    });
+                }
+                
+                // Sort schemes by priority and select top 3-4
+                allEligibleSchemes.sort((a, b) => b.priority - a.priority);
+                const topSchemes = allEligibleSchemes.slice(0, 4);
+                
+                // Show/hide schemes based on top matches
+                schemeCards.forEach(card => {
+                    const schemeName = card.querySelector('h3').textContent;
+                    const isTopScheme = topSchemes.some(scheme => scheme.name === schemeName);
+                    
+                    if (isTopScheme) {
+                        card.style.display = 'block';
+                        card.classList.add('highlight');
+                        setTimeout(() => card.classList.remove('highlight'), 2000);
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Show eligibility message with top schemes
+                if (topSchemes.length > 0) {
+                    let message = "Based on your profile, these are the most suitable schemes for you:\n\n";
+                    topSchemes.forEach((scheme, index) => {
+                        message += `${index + 1}. ${scheme.name}\n`;
+                    });
+                    addMessage(message, 'ai');
+                } else {
+                    addMessage("No schemes found matching your eligibility criteria.", 'ai');
+                }
+            }
+            
+            // Eligibility check functions for different categories
+            function checkHealthEligibility(userData) {
+                const age = parseInt(userData.age);
+                const income = parseInt(userData.income.split('-')[0]);
+                const caste = userData.caste;
+                
+                // PM-JAY eligibility
+                if (income <= 300000) {
+                    return {
+                        eligible: true,
+                        schemes: ['Ayushman Bharat - PM-JAY', 'Pradhan Mantri Surakshit Matritva Abhiyan'],
+                        priority: 1
+                    };
+                }
+                
+                // General health schemes
+                if (income <= 600000) {
+                    return {
+                        eligible: true,
+                        schemes: ['Pradhan Mantri Surakshit Matritva Abhiyan'],
+                        priority: 2
+                    };
+                }
+                
+                return { eligible: false, schemes: [], priority: 0 };
+            }
+            
+            function checkEducationEligibility(userData) {
+                const age = parseInt(userData.age);
+                const income = parseInt(userData.income.split('-')[0]);
+                const caste = userData.caste;
+                
+                // Scholarship eligibility
+                if (age >= 5 && age <= 25) {
+                    if (income <= 300000) {
+                        return {
+                            eligible: true,
+                            schemes: ['National Scholarship Portal', 'Mid-Day Meal Scheme'],
+                            priority: 1
+                        };
+                    } else if (income <= 600000) {
+                        return {
+                            eligible: true,
+                            schemes: ['National Scholarship Portal'],
+                            priority: 2
+                        };
+                    }
+                }
+                
+                return { eligible: false, schemes: [], priority: 0 };
+            }
+            
+            function checkFarmingEligibility(userData) {
+                const income = parseInt(userData.income.split('-')[0]);
+                const state = userData.state;
+                
+                // PMFBY eligibility
+                if (income <= 300000) {
+                    return {
+                        eligible: true,
+                        schemes: ['Pradhan Mantri Fasal Bima Yojana', 'Kisan Credit Card'],
+                        priority: 1
+                    };
+                }
+                
+                // KCC eligibility
+                if (income <= 600000) {
+                    return {
+                        eligible: true,
+                        schemes: ['Kisan Credit Card'],
+                        priority: 2
+                    };
+                }
+                
+                return { eligible: false, schemes: [], priority: 0 };
+            }
+            
+            function checkHousingEligibility(userData) {
+                const income = parseInt(userData.income.split('-')[0]);
+                const caste = userData.caste;
+                
+                // PMAY eligibility
+                if (income <= 300000) {
+                    return {
+                        eligible: true,
+                        schemes: ['Pradhan Mantri Awas Yojana - Gramin', 'Credit Linked Subsidy Scheme'],
+                        priority: 1
+                    };
+                }
+                
+                // CLSS eligibility
+                if (income <= 600000) {
+                    return {
+                        eligible: true,
+                        schemes: ['Credit Linked Subsidy Scheme'],
+                        priority: 2
+                    };
+                }
+                
+                return { eligible: false, schemes: [], priority: 0 };
+            }
+            
+            function checkWomenEligibility(userData) {
+                const age = parseInt(userData.age);
+                const income = parseInt(userData.income.split('-')[0]);
+                
+                if (userData.sex === 'female') {
+                    if (age >= 18 && age <= 45) {
+                        if (income <= 300000) {
+                            return {
+                                eligible: true,
+                                schemes: ['Pradhan Mantri Matru Vandana Yojana', 'Mahila Shakti Kendra'],
+                                priority: 1
+                            };
+                        } else if (income <= 600000) {
+                            return {
+                                eligible: true,
+                                schemes: ['Mahila Shakti Kendra'],
+                                priority: 2
+                            };
+                        }
+                    }
+                }
+                
+                return { eligible: false, schemes: [], priority: 0 };
+            }
+            
+            function checkEmploymentEligibility(userData) {
+                const age = parseInt(userData.age);
+                const income = parseInt(userData.income.split('-')[0]);
+                
+                if (age >= 18 && age <= 45) {
+                    if (income <= 300000) {
+                        return {
+                            eligible: true,
+                            schemes: ['Pradhan Mantri Kaushal Vikas Yojana', 'Mahatma Gandhi National Rural Employment Guarantee Act'],
+                            priority: 1
+                        };
+                    } else if (income <= 600000) {
+                        return {
+                            eligible: true,
+                            schemes: ['Pradhan Mantri Kaushal Vikas Yojana'],
+                            priority: 2
+                        };
+                    }
+                }
+                
+                return { eligible: false, schemes: [], priority: 0 };
+            }
+            
+            function checkSeniorEligibility(userData) {
+                const age = parseInt(userData.age);
+                const income = parseInt(userData.income.split('-')[0]);
+                
+                if (age >= 60) {
+                    if (income <= 300000) {
+                        return {
+                            eligible: true,
+                            schemes: ['National Pension System', 'Rashtriya Vayoshri Yojana'],
+                            priority: 1
+                        };
+                    } else if (income <= 600000) {
+                        return {
+                            eligible: true,
+                            schemes: ['National Pension System'],
+                            priority: 2
+                        };
+                    }
+                }
+                
+                return { eligible: false, schemes: [], priority: 0 };
+            }
+            
+            function checkFinancialEligibility(userData) {
+                const income = parseInt(userData.income.split('-')[0]);
+                
+                if (income <= 300000) {
+                    return {
+                        eligible: true,
+                        schemes: ['Pradhan Mantri Jan Dhan Yojana', 'Atal Pension Yojana'],
+                        priority: 1
+                    };
+                } else if (income <= 600000) {
+                    return {
+                        eligible: true,
+                        schemes: ['Atal Pension Yojana'],
+                        priority: 2
+                    };
+                }
+                
+                return { eligible: false, schemes: [], priority: 0 };
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all necessary elements
+            const voiceBtn = document.getElementById('voiceAssistant');
+            const searchInput = document.querySelector('.search-box input[type="text"]');
+            const searchBtn = document.querySelector('.search-btn');
+            const chatBody = document.getElementById('chatBody');
+            const schemeCards = document.querySelectorAll('.scheme-card');
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            
+            // Initialize Google Speech Recognition
+            let recognition;
+            try {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                recognition = new SpeechRecognition();
+                
+                // Configure recognition settings
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                recognition.lang = 'en-IN'; // Indian English
+                recognition.maxAlternatives = 1;
+                
+                // Voice button click handler
+                voiceBtn.addEventListener('click', function() {
+                    if (voiceBtn.classList.contains('listening')) {
+                        recognition.stop();
+                    } else {
+                        recognition.start();
+                    }
+                });
+
+                // Speech recognition event handlers
+                recognition.onstart = function() {
+                    voiceBtn.classList.add('listening');
+                    addMessage("Listening...", 'ai');
+                };
+
+                recognition.onresult = function(event) {
+                    const transcript = event.results[0][0].transcript.toLowerCase();
+                    searchInput.value = transcript;
+                    
+                    // Directly call the search function
+                    performSearch(transcript);
+                    
+                    processVoiceCommand(transcript);
+                };
+
+                recognition.onerror = function(event) {
+                    console.error('Speech recognition error', event.error);
+                    voiceBtn.classList.remove('listening');
+                    addMessage("Sorry, I couldn't hear you clearly. Please try again.", 'ai');
+                };
+
+                recognition.onend = function() {
+                    voiceBtn.classList.remove('listening');
+                };
+
+            } catch (e) {
+                console.error('Speech recognition not supported', e);
+                voiceBtn.style.display = 'none';
+                addMessage("Voice recognition is not supported in your browser. Please use Chrome or Edge.", 'ai');
+            }
+
+            // Search button click handler
+            searchBtn.addEventListener('click', function() {
+                const searchTerm = searchInput.value.toLowerCase();
+                if (searchTerm.trim() !== '') {
+                    performSearch(searchTerm);
+                }
+            });
+
+            // Search input enter key handler
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const searchTerm = searchInput.value.toLowerCase();
+                    if (searchTerm.trim() !== '') {
+                        performSearch(searchTerm);
+                    }
+                }
+            });
+
+            // Search input change handler
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                if (searchTerm.trim() !== '') {
+                    performSearch(searchTerm);
+                } else {
+                    showAllSchemes();
+                }
+            });
+
+            // Tab button click handlers
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    filterSchemesByCategory(category);
+                    addMessage(`Showing ${category} schemes...`, 'ai');
+                });
+            });
+
+            function performSearch(Health) {
+                let found = false;
+                schemeCards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const desc = card.querySelector('p').textContent.toLowerCase();
+                    
+                    if (title.includes(searchterm) || desc.includes(searchTerm)) {
+                        card.style.display = 'block';
+                        card.classList.add('highlight');
+                        setTimeout(() => card.classList.remove('highlight'), 2000);
+                        found = true;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                if (found) {
+                    addMessage(`Found schemes matching "${searchTerm}"`, 'ai');
+                } else {
+                    addMessage(`No schemes found matching "${searchTerm}"`, 'ai');
+                }
+            }
+
+            function processVoiceCommand(command) {
+                addMessage(command, 'user');
+                
+                // Category commands
+                if (command.includes('show') || command.includes('display')) {
+                    if (command.includes('health')) {
+                        filterSchemesByCategory('health');
+                        addMessage("Showing health schemes...", 'ai');
+                    } else if (command.includes('education')) {
+                        filterSchemesByCategory('education');
+                        addMessage("Showing education schemes...", 'ai');
+                    } else if (command.includes('farming')) {
+                        filterSchemesByCategory('farming');
+                        addMessage("Showing farming schemes...", 'ai');
+                    } else if (command.includes('housing')) {
+                        filterSchemesByCategory('housing');
+                        addMessage("Showing housing schemes...", 'ai');
+                    } else if (command.includes('women')) {
+                        filterSchemesByCategory('women');
+                        addMessage("Showing women schemes...", 'ai');
+                    } else if (command.includes('employment')) {
+                        filterSchemesByCategory('employment');
+                        addMessage("Showing employment schemes...", 'ai');
+                    } else if (command.includes('senior')) {
+                        filterSchemesByCategory('senior');
+                        addMessage("Showing senior citizen schemes...", 'ai');
+                    } else if (command.includes('financial')) {
+                        filterSchemesByCategory('financial');
+                        addMessage("Showing financial schemes...", 'ai');
+                    } else if (command.includes('digital')) {
+                        filterSchemesByCategory('digital');
+                        addMessage("Showing digital schemes...", 'ai');
+                    } else if (command.includes('all')) {
+                        filterSchemesByCategory('all');
+                        addMessage("Showing all schemes...", 'ai');
+                    }
+                }
+                // Search commands
+                else if (command.includes('search') || command.includes('find')) {
+                    const searchTerm = command.replace(/search|find/i, '').trim();
+                    searchInput.value = searchTerm;
+                    performSearch(searchTerm);
+                }
+                // Help commands
+                else if (command.includes('help') || command.includes('what can you do')) {
+                    addMessage("I can help you with:\n" +
+                             "1. Showing different categories of schemes (health, education, farming, etc.)\n" +
+                             "2. Searching for specific schemes\n" +
+                             "3. Checking eligibility for schemes\n" +
+                             "4. Providing detailed information about schemes\n\n" +
+                             "Just say 'show [category]' or 'search [term]'", 'ai');
+                }
+                // Default search
+                else {
+                    searchInput.value = command;
+                    performSearch(command);
+                }
+            }
+
+            function filterSchemesByCategory(category) {
+                tabBtns.forEach(btn => {
+                    if (btn.dataset.category === category) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+                
+                schemeCards.forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'block';
+                        card.classList.add('highlight');
+                        setTimeout(() => card.classList.remove('highlight'), 2000);
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+
+            function showAllSchemes() {
+                schemeCards.forEach(card => {
+                    card.style.display = 'block';
+                });
+                tabBtns.forEach(btn => {
+                    if (btn.dataset.category === 'all') {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
+
+            function addMessage(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message');
+                messageDiv.classList.add(sender + '-message');
+                messageDiv.innerHTML = text;
+                chatBody.appendChild(messageDiv);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>
