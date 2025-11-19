@@ -12,7 +12,7 @@ Sahyog Bharat is a digital initiative designed to bridge the gap between governm
 
 GETING STARTED :---------
 
-Clone the Repository git clone https://github.com/Aditya001-bit/SahyogBharat.git cd SahyogBharat
+Clone the Repository git clone https://github.com/mmeghashree456/SahyogBharat.git cd SahyogBharat
 
 Extract Assets
 
